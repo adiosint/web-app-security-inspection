@@ -1,0 +1,59 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+
+type Post = CollectionEntry<"posts">;
+
+const title = "Notes | Sayyidi Shaarani";
+const description =
+  "Applied security research and inspection notes. Structured observations on web application risk and inspection practice.";
+
+const posts = (await getCollection("posts"))
+  .filter((p: Post) => !p.data.draft)
+  .sort((a: Post, b: Post) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<BaseLayout title={title} description={description} canonicalPath="/notes/">
+  <section>
+    <h1>Notes</h1>
+
+    <p class="muted">
+      Applied security research and inspection notes. Structured observations on web application risk and assessment practice.
+    </p>
+
+    <hr />
+
+    {posts.length === 0 ? (
+      <p class="muted">Notes are published here as they are completed.</p>
+    ) : (
+      posts.map((post: Post) => (
+        <article style="margin-bottom: 3rem;">
+          <h2 style="text-transform:none; letter-spacing:0; color:var(--text);">
+            <a href={`/notes/${post.slug}/`} style="text-decoration:none;">
+              {post.data.title}
+            </a>
+          </h2>
+
+          <p class="muted" style="font-size:0.9rem;">
+            {post.data.date.toLocaleDateString("en-MY", {
+              year: "numeric",
+              month: "short",
+              day: "2-digit",
+            })}
+            {post.data.tags?.length > 0 && (
+              <> · {post.data.tags.join(", ")}</>
+            )}
+          </p>
+
+          <p>{post.data.description}</p>
+
+          <p>
+            <a href={`/notes/${post.slug}/`}>Read →</a>
+          </p>
+
+          <hr />
+        </article>
+      ))
+    )}
+  </section>
+</BaseLayout>

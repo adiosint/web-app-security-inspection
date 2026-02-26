@@ -1,0 +1,187 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const title = "Security Inspections for Web Applications | Sayyidi Shaarani";
+const description =
+  "Security inspections for web applications. For SMEs, startups, and NGOs seeking structured risk visibility. Defined scope, controlled assessment, clear reporting.";
+
+const EMAIL = "hello@sayyidishaarani.com";
+
+// Subject tuned for consultative, structured tone
+const primaryCtaSubject = "Web Application Inspection — Scope Inquiry";
+
+// Body template (structured, better qualification)
+const mailBody = `Hello Sayyidi,
+
+I would like to discuss an inspection scope.
+
+- Target URL (or environment):
+- Short description of the application:
+- Preferred testing window:
+- Contact authorized to approve scope:
+
+Regards,
+`;
+
+const mailtoHref = `mailto:${EMAIL}?subject=${encodeURIComponent(
+  primaryCtaSubject
+)}&body=${encodeURIComponent(mailBody)}`;
+---
+
+<BaseLayout title={title} description={description} canonicalPath="/inspection/">
+  <!-- HERO -->
+  <section id="hero">
+    <h1>Security Inspections for Web Applications</h1>
+    <p class="kicker">by Sayyidi Shaarani</p>
+    <p class="lede">For SMEs, startups, and NGOs seeking structured risk visibility.</p>
+
+    <div class="ctaRow">
+      <a class="cta ctaPrimary" href={mailtoHref}>Discuss Inspection Scope</a>
+      <a class="cta ctaSecondary" href="#model">View Inspection Model</a>
+    </div>
+
+    <p class="muted" style="margin-top: 0.75rem; font-size: 0.9rem;">
+      Typical duration: 1–2 weeks. Authorization required.
+    </p>
+  </section>
+
+  <!-- PROBLEM -->
+  <section id="problem">
+    <h2>Problem</h2>
+    <p class="lede">Most small teams lack structured visibility into application risk.</p>
+    <p>Web applications evolve continuously.</p>
+    <p>Small configuration decisions accumulate into meaningful risk.</p>
+  </section>
+
+  <!-- MODEL -->
+  <section id="model">
+    <h2>Model</h2>
+    <h3>Structured Inspection Model</h3>
+
+    <div class="grid two">
+      <div class="card">
+        <h3>Scope &amp; Authorization</h3>
+        <p class="muted">Boundaries and authorization defined before testing begins.</p>
+      </div>
+
+      <div class="card">
+        <h3>External Exposure Review</h3>
+        <p class="muted">Assessment of publicly reachable exposure and configuration posture.</p>
+      </div>
+
+      <div class="card">
+        <h3>Structured Application Testing</h3>
+        <p class="muted">
+          Evaluation of authentication, access control, input handling, and business logic within scope.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Risk Report &amp; Advisory</h3>
+        <p class="muted">Categorized findings with remediation guidance.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO -->
+  <section id="who">
+    <h2>Who</h2>
+    <h3>Who This Is For</h3>
+    <ul>
+      <li>SMEs operating customer-facing applications</li>
+      <li>Startups iterating rapidly</li>
+      <li>NGOs handling sensitive data</li>
+    </ul>
+  </section>
+
+  <!-- DEFINITION -->
+  <section id="definition">
+    <h2>Definition</h2>
+
+    <div class="grid two">
+      <div class="card">
+        <h3>What This Is</h3>
+        <ul>
+          <li>Defined scope</li>
+          <li>Controlled assessment</li>
+          <li>Clear documentation</li>
+          <li>Practical guidance</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>What This Is Not</h3>
+        <ul>
+          <li>No simulated breach demonstrations</li>
+          <li>No unreviewed automated reports</li>
+          <li>Not a regulatory audit</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- REPORT -->
+  <section id="report">
+    <h2>Report</h2>
+    <h3>Report Includes</h3>
+    <div class="callout">
+      <ul>
+        <li>Executive summary</li>
+        <li>Risk table</li>
+        <li>Structured findings</li>
+        <li>Remediation guidance</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ENGAGEMENT -->
+  <section id="engagement">
+    <h2>Engagement</h2>
+    <ol>
+      <li>Intro call</li>
+      <li>Written scope</li>
+      <li>Inspection window</li>
+      <li>Report delivery</li>
+      <li>Advisory review</li>
+    </ol>
+    <p class="muted">Typical duration: 1–2 weeks, depending on scope.</p>
+
+    <div class="ctaRow">
+      <a class="cta ctaPrimary" href={mailtoHref}>Discuss Inspection Scope</a>
+      <a class="cta ctaSecondary" href="#boundaries">Professional boundaries</a>
+    </div>
+  </section>
+
+  <!-- BOUNDARIES -->
+  <section id="boundaries">
+    <h2>Boundaries</h2>
+    <h3>Professional Boundaries</h3>
+    <p>Testing only with documented authorization.</p>
+    <p>No activity outside agreed scope.</p>
+    <p>No data retained beyond reporting requirements.</p>
+    <p class="muted">Confidentiality maintained.</p>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <h2>Contact</h2>
+    <h3>Discuss Inspection Scope</h3>
+
+    <p>Email: <a href={mailtoHref}>{EMAIL}</a></p>
+
+    <div class="callout">
+      <p><strong>Include:</strong></p>
+      <ul>
+        <li>Target URL (or environment)</li>
+        <li>Short application description</li>
+        <li>Preferred testing window</li>
+        <li>Point of contact who can authorize scope</li>
+      </ul>
+    </div>
+
+    <div class="ctaRow">
+      <a class="cta ctaPrimary" href={mailtoHref}>Discuss Inspection Scope</a>
+      <a class="cta ctaSecondary" href="#model">View Inspection Model</a>
+    </div>
+  </section>
+</BaseLayout>

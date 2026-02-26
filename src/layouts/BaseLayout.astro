@@ -1,0 +1,260 @@
+---
+type NavItem = { href: string; label: string };
+
+const {
+  title = "Sayyidi Shaarani",
+  description = "",
+  canonicalPath = "/",
+  ogType = "website",
+  ogImagePath = "/og.png",
+} = Astro.props;
+
+const DOMAIN = "https://sayyidishaarani.com";
+
+const safePath = (canonicalPath || "/").startsWith("/")
+  ? canonicalPath
+  : `/${canonicalPath}`;
+
+const canonicalUrl = `${DOMAIN}${safePath}`;
+const currentPath = Astro.url?.pathname || safePath;
+
+/**
+ * Single source of truth for navigation
+ */
+const nav: NavItem[] = [
+  { href: "/inspection/", label: "Inspection" },
+  { href: "/#about", label: "About" },
+  { href: "/notes/", label: "Notes" },
+  { href: "mailto:hello@sayyidishaarani.com", label: "Contact" },
+];
+
+const isMailto = (href: string) => href.startsWith("mailto:");
+const isHashLink = (href: string) => href.includes("#");
+const stripHash = (href: string) => href.split("#")[0];
+
+const isCurrent = (href: string): boolean => {
+  if (isMailto(href)) return false;
+
+  // Highlight About only when on homepage
+  if (isHashLink(href)) {
+    return currentPath === "/";
+  }
+
+  const normalizedHref = href.endsWith("/") ? href : `${href}/`;
+  const normalizedPath = currentPath.endsWith("/")
+    ? currentPath
+    : `${currentPath}/`;
+
+  return normalizedHref === normalizedPath;
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+
+    <link rel="canonical" href={canonicalUrl} />
+
+    <meta property="og:title" content={title} />
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={`${DOMAIN}${ogImagePath}`} />
+
+    <meta name="twitter:card" content="summary" />
+
+    <style is:global>
+      :root {
+        --max-width: 760px;
+        --text: #121212;
+        --muted: #565656;
+        --border: #e2e2e2;
+        --bg: #ffffff;
+        --bg-soft: #fafafa;
+        --link: #1a1a1a;
+        --radius: 12px;
+
+        --space-1: 0.5rem;
+        --space-2: 1rem;
+        --space-3: 1.5rem;
+        --space-4: 2.5rem;
+        --space-5: 4rem;
+        --space-6: 6rem;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", Roboto, sans-serif;
+        margin: 0;
+        color: var(--text);
+        background: var(--bg);
+        line-height: 1.65;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      a { color: var(--link); }
+      a:hover { text-decoration: underline; }
+
+      a:focus-visible {
+        outline: 2px solid var(--text);
+        outline-offset: 3px;
+        border-radius: 6px;
+      }
+
+      .skip {
+        position: absolute;
+        left: -999px;
+        top: auto;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+      }
+
+      .skip:focus {
+        position: static;
+        width: auto;
+        height: auto;
+        margin: var(--space-2);
+        padding: 0.6rem 0.8rem;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: var(--bg-soft);
+        display: inline-block;
+      }
+
+      .inner {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 0 var(--space-2);
+      }
+
+      .siteHeader {
+        border-bottom: 1px solid var(--border);
+        padding: var(--space-4) 0;
+      }
+
+      .siteHeader > .inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: var(--space-2);
+      }
+
+      .brand a {
+        text-decoration: none;
+        color: var(--text);
+        letter-spacing: 0.01em;
+      }
+
+      .brand a:hover {
+        text-decoration: underline;
+      }
+
+      nav.siteNav {
+        display: flex;
+        align-items: baseline;
+        gap: 0.9rem;
+      }
+
+      nav.siteNav a {
+        text-decoration: none;
+        color: var(--muted);
+        font-size: 0.95rem;
+        white-space: nowrap;
+      }
+
+      nav.siteNav a:hover {
+        color: var(--text);
+      }
+
+      nav.siteNav a[aria-current="page"] {
+        color: var(--text);
+        text-decoration: underline;
+        text-underline-offset: 4px;
+      }
+
+      main {
+        display: block;
+        margin: var(--space-5) auto;
+      }
+
+      section { margin: var(--space-6) 0; }
+
+      h1, h2, h3 {
+        line-height: 1.2;
+        margin: 0 0 var(--space-2) 0;
+        letter-spacing: -0.01em;
+      }
+
+      h1 { font-size: clamp(1.9rem, 2.6vw, 2.4rem); }
+
+      p { margin: 0 0 var(--space-2) 0; }
+
+      .muted { color: var(--muted); }
+
+      hr {
+        border: 0;
+        border-top: 1px solid var(--border);
+        margin: var(--space-3) 0;
+      }
+
+      :target {
+        scroll-margin-top: var(--space-5);
+      }
+
+      footer.inner {
+        border-top: 1px solid var(--border);
+        padding: var(--space-4) var(--space-2);
+        margin-top: var(--space-6);
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
+
+      @media (max-width: 520px) {
+        .siteHeader > .inner {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <a class="skip" href="#content">Skip to content</a>
+
+    <header class="siteHeader">
+      <div class="inner">
+        <div class="brand">
+          <strong><a href="/">Sayyidi Shaarani</a></strong>
+        </div>
+
+        <nav class="siteNav" aria-label="Primary">
+          {nav.map((item) => (
+            <a
+              href={item.href}
+              aria-current={isCurrent(item.href) ? "page" : undefined}
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
+      </div>
+    </header>
+
+    <main id="content" class="inner">
+      <slot />
+    </main>
+
+    <footer class="inner">
+      © {new Date().getFullYear()} Sayyidi Shaarani
+    </footer>
+  </body>
+</html>

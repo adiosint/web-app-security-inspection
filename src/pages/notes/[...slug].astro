@@ -1,0 +1,119 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+
+type Post = CollectionEntry<"posts">;
+
+export async function getStaticPaths() {
+  const posts = (await getCollection("posts")) as Post[];
+
+  return posts
+    .filter((p: Post) => !p.data.draft)
+    .map((p: Post) => ({
+      params: { slug: p.slug },
+      props: { post: p },
+    }));
+}
+
+const { post } = Astro.props as { post: Post };
+const { Content } = await post.render();
+
+const title = `${post.data.title} | Sayyidi Shaarani`;
+const description = post.data.description;
+
+// Foundational slugs (keep synced with notes index)
+const foundationalSlugs = [
+  "structured-inspection-differs-from-adversarial-simulation",
+  "how-the-owasp-top-10-informs-a-structured-inspection-model",
+  "limits-of-automated-vulnerability-scanning",
+  "severity-scores-mislead-decision-making",
+  "security-visibility-before-scale",
+];
+
+const isFoundational = foundationalSlugs.includes(post.slug);
+
+// More posts (latest 3 excluding current)
+const all = (await getCollection("posts")) as Post[];
+const more = all
+  .filter((p: Post) => !p.data.draft && p.slug !== post.slug)
+  .sort((a: Post, b: Post) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+
+// Type label mapping
+const typeLabel =
+  post.data.type === "framework"
+    ? "Framework Analysis"
+    : post.data.type === "practice"
+      ? "Inspection Practice"
+      : null;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath={`/notes/${post.slug}/`}
+  ogType="article"
+>
+  <article class="prose">
+    <!-- Back link -->
+    <p class="muted" style="margin-bottom: 1.25rem;">
+      <a href="/notes/" style="text-decoration:none;">← Research &amp; Notes</a>
+    </p>
+
+    <header>
+      <h1>{post.data.title}</h1>
+
+      {isFoundational && (
+        <p class="label" style="margin-top:0.6rem;">
+          Part of the Structured Inspection Series
+        </p>
+      )}
+
+      {typeLabel && (
+        <p class="muted" style="margin-top:0.3rem; font-size:0.85rem;">
+          {typeLabel}
+        </p>
+      )}
+
+      <p class="muted" style="font-size:0.9rem; margin:0.5rem 0 0.75rem 0;">
+        {post.data.date.toLocaleDateString("en-MY", {
+          year: "numeric",
+          month: "short",
+          day: "2-digit",
+        })}
+        {post.data.tags && post.data.tags.length > 0 && (
+          <> · {post.data.tags.join(", ")}</>
+        )}
+      </p>
+
+      {post.data.description && (
+        <p class="muted" style="margin: 0 0 1.5rem 0;">
+          {post.data.description}
+        </p>
+      )}
+
+      <div class="divider"></div>
+    </header>
+
+    <Content />
+
+    <div class="divider"></div>
+
+    <p class="muted">
+      <a href="/inspection/">Inspection model</a> · <a href="/notes/">All essays</a>
+    </p>
+
+    {more.length > 0 && (
+      <section style="margin-top: 3rem;">
+        <p class="label">More Essays</p>
+        <ul>
+          {more.map((p: Post) => (
+            <li>
+              <a href={`/notes/${p.slug}/`}>{p.data.title}</a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+  </article>
+</BaseLayout>
