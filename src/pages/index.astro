@@ -18,46 +18,145 @@ const mailtoHref =
 ---
 
 <BaseLayout title={title} description={description} canonicalPath="/">
-  <section class="homeHero">
-    <div class="stack tight">
-      <h1>Web Application Security Inspector</h1>
-      <p class="muted lede">Independent inspections for SMEs, startups, and NGOs.</p>
+  <section aria-labelledby="home-title" class="hero">
+    <p class="eyebrow">Independent Practice</p>
+    <h1 id="home-title">Web Application Security Inspection</h1>
+    <p class="lede">
+      For SMEs, startups, and NGOs that need clear visibility into application security risk.
+    </p>
+    <p>
+      I provide structured inspections with defined scope, proportionate validation, and
+      evidence-based reporting focused on practical remediation decisions.
+    </p>
 
-      <p class="lede">
-        I conduct structured web application inspections designed to provide clear, evidence-based visibility into security risk.
-        Engagements are defined in scope, proportionate in validation, and focused on actionable remediation guidance.
-      </p>
+    <ul class="points" aria-label="Inspection approach">
+      <li>Written scope and authorization before testing</li>
+      <li>Documented findings with traceable evidence</li>
+      <li>Actionable guidance aligned to operational constraints</li>
+    </ul>
 
-      <div class="ctaRow">
-        <a class="cta ctaPrimary" href={mailtoHref}>Discuss Inspection Scope</a>
-        <a class="cta" href="/inspection/">View Inspection Model</a>
-      </div>
-    </div>
+    <nav class="ctaRow" aria-label="Primary actions">
+      <a class="cta ctaPrimary" href={mailtoHref}>Discuss Inspection Scope</a>
+      <a class="cta ctaSecondary" href="/inspection/">View Inspection Model</a>
+    </nav>
+
+    <p class="muted meta">Typical duration: 1–2 weeks, depending on scope.</p>
   </section>
 
   <hr />
 
-  <!-- About anchor -->
-  <section id="about" class="homeBody">
-    <div class="stack">
-      <p>
-        My professional background includes enterprise cybersecurity operations, with focus on vulnerability management,
-        web application security testing, and governance-aligned risk validation.
-      </p>
-
-      <p class="muted">
-        The same disciplined approach is applied to smaller organizations that require structured risk visibility without
-        enterprise-scale overhead.
-      </p>
-    </div>
+  <section id="about" aria-labelledby="about-title">
+    <h2 id="about-title">About</h2>
+    <p>
+      My professional background includes enterprise cybersecurity operations, with focus
+      on vulnerability management, web application security testing, and governance-aligned
+      risk validation.
+    </p>
+    <p class="muted">
+      The same disciplined approach is applied to smaller organizations that need
+      structured risk visibility without enterprise-scale overhead.
+    </p>
   </section>
 
-  <section class="homeLinks">
-    <div class="stack">
-      <div class="cluster">
-        <a class="cta" href="/notes/">Read Notes</a>
-        <a class="cta" href="/inspection/#model">Inspection model (summary)</a>
-      </div>
-    </div>
+  <section aria-labelledby="next-title">
+    <h2 id="next-title">Next Steps</h2>
+    <p>
+      Review the inspection model to confirm fit, then send scope details to begin a
+      structured discussion.
+    </p>
+    <nav class="ctaRow" aria-label="Secondary actions">
+      <a class="cta ctaSecondary" href="/notes/">Read Notes</a>
+      <a class="cta ctaSecondary" href="/inspection/#model">Inspection Model Summary</a>
+    </nav>
   </section>
 </BaseLayout>
+
+<style>
+  section {
+    margin: var(--space-5) 0;
+  }
+
+  .hero {
+    margin-top: var(--space-3);
+  }
+
+  .eyebrow {
+    margin-bottom: var(--space-1);
+    font-size: 0.82rem;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .lede {
+    font-size: 1.08rem;
+    line-height: 1.55;
+    max-width: 62ch;
+    margin-bottom: var(--space-2);
+  }
+
+  .points {
+    margin: var(--space-3) 0;
+    padding-left: 1.15rem;
+  }
+
+  .points li {
+    margin-bottom: 0.45rem;
+  }
+
+  .ctaRow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: var(--space-3);
+  }
+
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.62rem 0.9rem;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.96rem;
+    line-height: 1.2;
+  }
+
+  .cta:hover {
+    text-decoration: none;
+    border-color: #c8c8c8;
+    background: var(--bg-soft);
+  }
+
+  .ctaPrimary {
+    background: var(--text);
+    color: #fff;
+    border-color: var(--text);
+  }
+
+  .ctaPrimary:hover {
+    background: #242424;
+    border-color: #242424;
+  }
+
+  .meta {
+    margin-top: var(--space-2);
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 640px) {
+    section {
+      margin: var(--space-4) 0;
+    }
+
+    .hero {
+      margin-top: var(--space-2);
+    }
+
+    .cta {
+      width: 100%;
+    }
+  }
+</style>
