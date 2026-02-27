@@ -1,21 +1,13 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { inspectionScopeMailtoHref } from "../lib/contact";
 import { getServicePageStructuredData } from "../lib/structuredData";
 
 const title = "Sayyidi Shaarani";
 const description =
   "Independent web application security inspector. Security inspections and applied research.";
 
-const EMAIL = "hello@sayyidishaarani.com";
-const primaryCtaSubject = "Inspection Scope Request";
-
-const shortBody = `Target URL / environment:
-App type (1–2 lines):
-Preferred window:
-Authorized contact:`;
-
-const mailtoHref =
-  `mailto:${EMAIL}?subject=${encodeURIComponent(primaryCtaSubject)}&body=${encodeURIComponent(shortBody)}`;
+const mailtoHref = inspectionScopeMailtoHref;
 
 const structuredData = getServicePageStructuredData({
   path: "/",
@@ -72,10 +64,9 @@ const structuredData = getServicePageStructuredData({
   <section aria-labelledby="about-title">
     <h2 id="about-title">About</h2>
     <p>
-      Direct, independent inspections led by Sayyidi Shaarani with structured
-      methodology and evidence-based reporting.
+      Background and operating approach are documented on the dedicated About page.
     </p>
-    <p><a href="/about/">View full background and approach</a></p>
+    <p><a href="/about/">View background and approach</a></p>
   </section>
 </BaseLayout>
 

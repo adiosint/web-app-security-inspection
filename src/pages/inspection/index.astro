@@ -1,32 +1,16 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import {
+  CONTACT_EMAIL,
+  inspectionScopeMailtoHref,
+} from "../../lib/contact";
 import { getServicePageStructuredData } from "../../lib/structuredData";
 
 const title = "Security Inspections for Web Applications | Sayyidi Shaarani";
 const description =
   "Security inspections for web applications. For SMEs, startups, and NGOs seeking structured risk visibility. Defined scope, controlled assessment, clear reporting.";
 
-const EMAIL = "hello@sayyidishaarani.com";
-
-// Subject tuned for consultative, structured tone
-const primaryCtaSubject = "Web Application Inspection — Scope Inquiry";
-
-// Body template (structured, better qualification)
-const mailBody = `Hello Sayyidi,
-
-I would like to discuss an inspection scope.
-
-- Target URL (or environment):
-- Short description of the application:
-- Preferred testing window:
-- Contact authorized to approve scope:
-
-Regards,
-`;
-
-const mailtoHref = `mailto:${EMAIL}?subject=${encodeURIComponent(
-  primaryCtaSubject
-)}&body=${encodeURIComponent(mailBody)}`;
+const mailtoHref = inspectionScopeMailtoHref;
 
 const structuredData = getServicePageStructuredData({
   path: "/inspection/",
@@ -53,8 +37,7 @@ const structuredData = getServicePageStructuredData({
     </nav>
 
     <p class="muted meta">
-      Typical duration: 1–2 weeks. Authorization required. Initial response is
-      typically within one business day.
+      Typical duration: 1–2 weeks, depending on scope.
     </p>
   </section>
 
@@ -165,20 +148,17 @@ const structuredData = getServicePageStructuredData({
 
     <nav class="ctaRow" aria-label="Engagement actions">
       <a class="cta ctaPrimary" href={mailtoHref}>Discuss Inspection Scope</a>
-      <a class="cta ctaSecondary" href="/boundaries/">Professional boundaries</a>
+      <a class="cta ctaSecondary" href="/boundaries/">Professional Boundaries</a>
     </nav>
   </section>
 
   <!-- BOUNDARIES -->
   <section id="boundaries">
     <h2>Professional Boundaries</h2>
-    <p>Testing proceeds only with documented authorization and written scope.</p>
-    <p>No activity is performed outside agreed boundaries or approved windows.</p>
-    <ul class="trustList">
-      <li>Evidence is collected only for reporting and remediation guidance</li>
-      <li>Findings remain traceable to validated observations</li>
-      <li>Confidentiality is maintained throughout the engagement</li>
-    </ul>
+    <p>
+      Inspection activity is limited to written scope, authorization, and
+      agreed testing windows.
+    </p>
     <p class="muted">
       Full reference: <a href="/boundaries/">Engagement Boundaries</a>
     </p>
@@ -188,7 +168,7 @@ const structuredData = getServicePageStructuredData({
   <section id="contact">
     <h2>Discuss Inspection Scope</h2>
 
-    <p>Email: <a href={mailtoHref}>{EMAIL}</a></p>
+    <p>Email: <a href={mailtoHref}>{CONTACT_EMAIL}</a></p>
 
     <div class="callout">
       <p><strong>Include:</strong></p>

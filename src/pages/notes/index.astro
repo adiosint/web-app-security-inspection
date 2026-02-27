@@ -12,24 +12,16 @@ const posts = (await getCollection("posts"))
   .filter((p: Post) => !p.data.draft)
   .sort((a: Post, b: Post) => b.data.date.valueOf() - a.data.date.valueOf());
 
-const taxonomyGuide = [
-  {
-    label: "When to Inspect",
-    description: "When structured inspection is likely to reduce material risk.",
-  },
-  {
-    label: "How Inspection Works",
-    description: "How scope, validation, and reporting are performed.",
-  },
-  {
-    label: "How to Act on Findings",
-    description: "How to prioritize and act on inspection output.",
-  },
-  {
-    label: "Scope and Boundaries",
-    description: "How inspection differs from adjacent services and where limits apply.",
-  },
+const labelOrder = [
+  "When to Inspect",
+  "How Inspection Works",
+  "How to Act on Findings",
+  "Scope and Boundaries",
 ];
+
+const labelsInUse = labelOrder.filter((label) =>
+  posts.some((post: Post) => post.data.primaryLabel === label)
+);
 ---
 
 <BaseLayout title={title} description={description} canonicalPath="/notes/">
@@ -41,17 +33,11 @@ const taxonomyGuide = [
       security decision support.
     </p>
 
-    <section class="taxonomy" aria-labelledby="taxonomy-title">
-      <h2 id="taxonomy-title">Taxonomy</h2>
-      <dl class="taxonomyList">
-        {taxonomyGuide.map((item) => (
-          <div class="taxonomyItem">
-            <dt>{item.label}</dt>
-            <dd>{item.description}</dd>
-          </div>
-        ))}
-      </dl>
-    </section>
+    {labelsInUse.length > 0 && (
+      <p class="muted taxonomyHint" aria-label="Current note labels">
+        Labels: {labelsInUse.join(" · ")}
+      </p>
+    )}
 
     {posts.length === 0 ? (
       <p class="muted">No notes published yet.</p>
@@ -63,14 +49,14 @@ const taxonomyGuide = [
               <a href={`/notes/${post.slug}/`}>{post.data.title}</a>
             </h2>
 
-            <p>{post.data.description}</p>
-
             <p class="meta" aria-label="Primary note label">
               {post.data.primaryLabel}
             </p>
 
+            <p class="noteSummary">{post.data.description}</p>
+
             <p class="readLink">
-              <a href={`/notes/${post.slug}/`}>Read note</a>
+              <a href={`/notes/${post.slug}/`}>Read Note</a>
             </p>
           </article>
         ))}
@@ -82,40 +68,19 @@ const taxonomyGuide = [
 <style>
   .notesIndex {
     margin-top: var(--space-3);
+    max-width: 70ch;
   }
 
   .intro {
-    max-width: 66ch;
-    margin-bottom: var(--space-3);
+    max-width: 64ch;
+    font-size: 1.02rem;
+    line-height: 1.62;
+    margin-bottom: var(--space-2);
   }
 
-  .taxonomy {
-    margin: 0 0 var(--space-4);
-  }
-
-  .taxonomy h2 {
-    font-size: 1rem;
-    margin-bottom: 0.7rem;
-  }
-
-  .taxonomyList {
-    margin: 0;
-  }
-
-  .taxonomyItem {
-    margin-bottom: 0.6rem;
-  }
-
-  .taxonomyItem dt {
+  .taxonomyHint {
+    margin: 0 0 var(--space-3);
     font-size: 0.9rem;
-    color: var(--text);
-  }
-
-  .taxonomyItem dd {
-    margin: 0.15rem 0 0;
-    color: var(--muted);
-    font-size: 0.86rem;
-    max-width: 68ch;
   }
 
   .notesList {
@@ -142,16 +107,24 @@ const taxonomyGuide = [
 
   .noteItem h2 a:hover {
     text-decoration: underline;
+    text-underline-offset: 3px;
   }
 
   .meta {
-    margin: 0.8rem 0 0;
+    margin: 0.2rem 0 0.55rem;
     color: var(--muted);
     font-size: 0.86rem;
   }
 
+  .noteSummary {
+    max-width: 64ch;
+    line-height: 1.62;
+    margin: 0;
+  }
+
   .readLink {
-    margin-top: 0.7rem;
+    margin-top: 0.85rem;
     margin-bottom: 0;
+    font-size: 0.94rem;
   }
 </style>

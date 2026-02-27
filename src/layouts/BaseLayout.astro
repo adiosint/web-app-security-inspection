@@ -1,4 +1,6 @@
 ---
+import { inspectionScopeMailtoHref } from "../lib/contact";
+
 type NavItem = { href: string; label: string };
 
 const {
@@ -11,17 +13,6 @@ const {
 } = Astro.props;
 
 const DOMAIN = "https://sayyidishaarani.com";
-const EMAIL = "hello@sayyidishaarani.com";
-
-const contactSubject = "Inspection Scope Request";
-const contactBody = `Target URL / environment:
-App type (1-2 lines):
-Preferred window:
-Authorized contact:`;
-const contactMailtoHref = `mailto:${EMAIL}?subject=${encodeURIComponent(
-  contactSubject
-)}&body=${encodeURIComponent(contactBody)}`;
-
 const safePath = (canonicalPath || "/").startsWith("/")
   ? canonicalPath
   : `/${canonicalPath}`;
@@ -36,7 +27,7 @@ const nav: NavItem[] = [
   { href: "/inspection/", label: "Inspection" },
   { href: "/about/", label: "About" },
   { href: "/notes/", label: "Notes" },
-  { href: contactMailtoHref, label: "Contact" },
+  { href: inspectionScopeMailtoHref, label: "Contact" },
 ];
 
 const isMailto = (href: string) => href.startsWith("mailto:");

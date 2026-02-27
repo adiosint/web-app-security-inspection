@@ -1,22 +1,13 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { inspectionScopeMailtoHref } from "../../lib/contact";
 import { getServicePageStructuredData } from "../../lib/structuredData";
 
 const title = "Engagement Boundaries | Sayyidi Shaarani";
 const description =
   "Professional boundaries for structured web application security inspections, including authorization, scope, and data handling.";
 
-const EMAIL = "hello@sayyidishaarani.com";
-const primaryCtaSubject = "Inspection Scope Request";
-
-const shortBody = `Target URL / environment:
-App type (1-2 lines):
-Preferred window:
-Authorized contact:`;
-
-const mailtoHref = `mailto:${EMAIL}?subject=${encodeURIComponent(
-  primaryCtaSubject
-)}&body=${encodeURIComponent(shortBody)}`;
+const mailtoHref = inspectionScopeMailtoHref;
 
 const structuredData = getServicePageStructuredData({
   path: "/boundaries/",
@@ -37,6 +28,19 @@ const structuredData = getServicePageStructuredData({
       Inspections are conducted within documented authorization and agreed scope.
       These boundaries protect operational stability and reporting integrity.
     </p>
+
+    <ul class="atGlance" aria-label="Boundary summary">
+      <li>Written authorization before testing</li>
+      <li>No activity outside approved scope</li>
+      <li>Evidence handling limited to engagement needs</li>
+    </ul>
+
+    <nav class="sectionLinks" aria-label="Boundary sections">
+      <a href="#authorization-title">Authorization</a>
+      <a href="#scope-title">Scope</a>
+      <a href="#data-title">Data Handling</a>
+      <a href="#exclusions-title">Exclusions</a>
+    </nav>
   </section>
 
   <section aria-labelledby="authorization-title">
@@ -81,6 +85,15 @@ const structuredData = getServicePageStructuredData({
       To begin, provide the target environment, short application context,
       preferred window, and the authorized contact for scope approval.
     </p>
+    <div class="callout">
+      <p><strong>Include:</strong></p>
+      <ul>
+        <li>Target URL or environment</li>
+        <li>Short application description</li>
+        <li>Preferred testing window</li>
+        <li>Scope authorization contact</li>
+      </ul>
+    </div>
     <nav class="ctaRow" aria-label="Boundaries page actions">
       <a class="cta ctaPrimary" href={mailtoHref}>Discuss Inspection Scope</a>
       <a class="cta ctaSecondary" href="/inspection/">View Inspection Model</a>
@@ -91,6 +104,7 @@ const structuredData = getServicePageStructuredData({
 <style>
   section {
     margin: var(--space-5) 0;
+    max-width: 70ch;
   }
 
   .hero {
@@ -100,15 +114,54 @@ const structuredData = getServicePageStructuredData({
   .lede {
     font-size: 1.08rem;
     line-height: 1.55;
-    max-width: 62ch;
+    max-width: 64ch;
+  }
+
+  .atGlance {
+    margin: var(--space-3) 0 var(--space-2);
+    padding-left: 1.2rem;
+  }
+
+  .sectionLinks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    font-size: 0.9rem;
+  }
+
+  .sectionLinks a {
+    color: var(--muted);
+    text-decoration: none;
+  }
+
+  .sectionLinks a:hover {
+    color: var(--text);
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 
   ul {
     padding-left: 1.2rem;
   }
 
+  li {
+    line-height: 1.55;
+  }
+
   li + li {
     margin-top: 0.35rem;
+  }
+
+  .callout {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: var(--space-2);
+    background: var(--bg-soft);
+    margin-top: var(--space-2);
+  }
+
+  .callout p {
+    margin-bottom: 0.4rem;
   }
 
   @media (max-width: 640px) {
