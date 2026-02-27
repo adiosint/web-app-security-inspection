@@ -1,0 +1,94 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getServicePageStructuredData } from "../../lib/structuredData";
+
+const title = "About | Sayyidi Shaarani";
+const description =
+  "Professional background and operating approach for independent web application security inspections.";
+
+const structuredData = getServicePageStructuredData({
+  path: "/about/",
+  title,
+  description,
+});
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath="/about/"
+  structuredData={structuredData}
+>
+  <section class="hero" aria-labelledby="about-title">
+    <h1 id="about-title">About</h1>
+    <p class="lede">
+      I provide independent web application security inspections for SMEs,
+      startups, and NGOs that need clear, evidence-based risk visibility.
+    </p>
+  </section>
+
+  <section aria-labelledby="background-title">
+    <h2 id="background-title">Professional Background</h2>
+    <p>
+      My background includes enterprise cybersecurity operations, with focus on
+      vulnerability management, web application security testing, and
+      governance-aligned risk validation.
+    </p>
+  </section>
+
+  <section aria-labelledby="approach-title">
+    <h2 id="approach-title">Operating Approach</h2>
+    <p>
+      I apply an enterprise-tested inspection discipline to smaller teams:
+      defined scope, controlled validation, and practical reporting aligned to
+      operational constraints.
+    </p>
+    <ul>
+      <li>Written scope and authorization before testing</li>
+      <li>Proportionate validation within agreed boundaries</li>
+      <li>Actionable reporting focused on remediation decisions</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="navigation-title">
+    <h2 id="navigation-title">Next</h2>
+    <nav class="ctaRow" aria-label="About page actions">
+      <a class="cta ctaSecondary" href="/inspection/">View Inspection Model</a>
+      <a class="cta ctaSecondary" href="/boundaries/">Engagement Boundaries</a>
+    </nav>
+  </section>
+</BaseLayout>
+
+<style>
+  section {
+    margin: var(--space-5) 0;
+  }
+
+  .hero {
+    margin-top: var(--space-3);
+  }
+
+  .lede {
+    font-size: 1.08rem;
+    line-height: 1.55;
+    max-width: 62ch;
+  }
+
+  ul {
+    padding-left: 1.2rem;
+  }
+
+  li + li {
+    margin-top: 0.35rem;
+  }
+
+  @media (max-width: 640px) {
+    section {
+      margin: var(--space-4) 0;
+    }
+
+    .hero {
+      margin-top: var(--space-2);
+    }
+  }
+</style>

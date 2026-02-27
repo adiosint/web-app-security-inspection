@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getServicePageStructuredData } from "../../lib/structuredData";
 
 const title = "Security Inspections for Web Applications | Sayyidi Shaarani";
 const description =
@@ -26,37 +27,40 @@ Regards,
 const mailtoHref = `mailto:${EMAIL}?subject=${encodeURIComponent(
   primaryCtaSubject
 )}&body=${encodeURIComponent(mailBody)}`;
+
+const structuredData = getServicePageStructuredData({
+  path: "/inspection/",
+  title,
+  description,
+});
 ---
 
-<BaseLayout title={title} description={description} canonicalPath="/inspection/">
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath="/inspection/"
+  structuredData={structuredData}
+>
   <!-- HERO -->
-  <section id="hero">
+  <section id="hero" class="hero">
     <h1>Security Inspections for Web Applications</h1>
     <p class="kicker">by Sayyidi Shaarani</p>
     <p class="lede">For SMEs, startups, and NGOs seeking structured risk visibility.</p>
 
-    <div class="ctaRow">
+    <nav class="ctaRow" aria-label="Primary inspection actions">
       <a class="cta ctaPrimary" href={mailtoHref}>Discuss Inspection Scope</a>
       <a class="cta ctaSecondary" href="#model">View Inspection Model</a>
-    </div>
+    </nav>
 
-    <p class="muted" style="margin-top: 0.75rem; font-size: 0.9rem;">
-      Typical duration: 1–2 weeks. Authorization required.
+    <p class="muted meta">
+      Typical duration: 1–2 weeks. Authorization required. Initial response is
+      typically within one business day.
     </p>
-  </section>
-
-  <!-- PROBLEM -->
-  <section id="problem">
-    <h2>Problem</h2>
-    <p class="lede">Most small teams lack structured visibility into application risk.</p>
-    <p>Web applications evolve continuously.</p>
-    <p>Small configuration decisions accumulate into meaningful risk.</p>
   </section>
 
   <!-- MODEL -->
   <section id="model">
-    <h2>Model</h2>
-    <h3>Structured Inspection Model</h3>
+    <h2>Structured Inspection Model</h2>
 
     <div class="grid two">
       <div class="card">
@@ -85,18 +89,22 @@ const mailtoHref = `mailto:${EMAIL}?subject=${encodeURIComponent(
 
   <!-- WHO -->
   <section id="who">
-    <h2>Who</h2>
-    <h3>Who This Is For</h3>
+    <h2>Who This Is For</h2>
+    <p class="muted">
+      Typical engagement profiles include customer-facing platforms where
+      application changes can outpace formal risk visibility.
+    </p>
     <ul>
       <li>SMEs operating customer-facing applications</li>
       <li>Startups iterating rapidly</li>
       <li>NGOs handling sensitive data</li>
+      <li>Teams preparing for growth with limited internal security capacity</li>
     </ul>
   </section>
 
   <!-- DEFINITION -->
   <section id="definition">
-    <h2>Definition</h2>
+    <h2>What This Is and Is Not</h2>
 
     <div class="grid two">
       <div class="card">
@@ -122,8 +130,7 @@ const mailtoHref = `mailto:${EMAIL}?subject=${encodeURIComponent(
 
   <!-- REPORT -->
   <section id="report">
-    <h2>Report</h2>
-    <h3>Report Includes</h3>
+    <h2>Report Includes</h2>
     <div class="callout">
       <ul>
         <li>Executive summary</li>
@@ -132,6 +139,16 @@ const mailtoHref = `mailto:${EMAIL}?subject=${encodeURIComponent(
         <li>Remediation guidance</li>
       </ul>
     </div>
+  </section>
+
+  <!-- CONTACT FLOW -->
+  <section id="contact-flow">
+    <h2>After You Email</h2>
+    <ol>
+      <li>Scope-fit response, typically within one business day</li>
+      <li>Short scoping call to define targets, boundaries, and timing</li>
+      <li>Written scope and authorization before any testing activity</li>
+    </ol>
   </section>
 
   <!-- ENGAGEMENT -->
@@ -146,26 +163,30 @@ const mailtoHref = `mailto:${EMAIL}?subject=${encodeURIComponent(
     </ol>
     <p class="muted">Typical duration: 1–2 weeks, depending on scope.</p>
 
-    <div class="ctaRow">
+    <nav class="ctaRow" aria-label="Engagement actions">
       <a class="cta ctaPrimary" href={mailtoHref}>Discuss Inspection Scope</a>
-      <a class="cta ctaSecondary" href="#boundaries">Professional boundaries</a>
-    </div>
+      <a class="cta ctaSecondary" href="/boundaries/">Professional boundaries</a>
+    </nav>
   </section>
 
   <!-- BOUNDARIES -->
   <section id="boundaries">
-    <h2>Boundaries</h2>
-    <h3>Professional Boundaries</h3>
-    <p>Testing only with documented authorization.</p>
-    <p>No activity outside agreed scope.</p>
-    <p>No data retained beyond reporting requirements.</p>
-    <p class="muted">Confidentiality maintained.</p>
+    <h2>Professional Boundaries</h2>
+    <p>Testing proceeds only with documented authorization and written scope.</p>
+    <p>No activity is performed outside agreed boundaries or approved windows.</p>
+    <ul class="trustList">
+      <li>Evidence is collected only for reporting and remediation guidance</li>
+      <li>Findings remain traceable to validated observations</li>
+      <li>Confidentiality is maintained throughout the engagement</li>
+    </ul>
+    <p class="muted">
+      Full reference: <a href="/boundaries/">Engagement Boundaries</a>
+    </p>
   </section>
 
   <!-- CONTACT -->
   <section id="contact">
-    <h2>Contact</h2>
-    <h3>Discuss Inspection Scope</h3>
+    <h2>Discuss Inspection Scope</h2>
 
     <p>Email: <a href={mailtoHref}>{EMAIL}</a></p>
 
@@ -179,9 +200,81 @@ const mailtoHref = `mailto:${EMAIL}?subject=${encodeURIComponent(
       </ul>
     </div>
 
-    <div class="ctaRow">
+    <nav class="ctaRow" aria-label="Contact actions">
       <a class="cta ctaPrimary" href={mailtoHref}>Discuss Inspection Scope</a>
       <a class="cta ctaSecondary" href="#model">View Inspection Model</a>
-    </div>
+    </nav>
   </section>
 </BaseLayout>
+
+<style>
+  section {
+    margin: var(--space-5) 0;
+  }
+
+  .hero {
+    margin-top: var(--space-3);
+  }
+
+  .kicker {
+    margin-bottom: 0.5rem;
+    color: var(--muted);
+    font-size: 0.88rem;
+  }
+
+  .lede {
+    font-size: 1.08rem;
+    line-height: 1.55;
+    max-width: 62ch;
+  }
+
+  .meta {
+    margin-top: 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .grid.two {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2);
+    margin-top: var(--space-2);
+  }
+
+  .card {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: var(--space-2);
+    background: var(--bg-soft);
+  }
+
+  .card h3 {
+    margin-bottom: 0.45rem;
+    font-size: 1.05rem;
+  }
+
+  .callout {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: var(--space-2);
+    background: var(--bg-soft);
+  }
+
+  ul,
+  ol {
+    padding-left: 1.2rem;
+  }
+
+  li + li {
+    margin-top: 0.35rem;
+  }
+
+  @media (max-width: 640px) {
+    section {
+      margin: var(--space-4) 0;
+    }
+
+    .hero {
+      margin-top: var(--space-2);
+    }
+  }
+</style>

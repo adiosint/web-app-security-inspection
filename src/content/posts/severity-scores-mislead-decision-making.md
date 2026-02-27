@@ -2,9 +2,9 @@
 title: "When Severity Scores Mislead Decision-Making"
 description: "Understanding the limits of numerical severity scoring in structured web application inspections."
 date: 2026-03-04
-draft: false
-type: "practice"
-tags: ["risk", "inspection-model", "methodology"]
+draft: true
+series: "Structured Inspection Series"
+primaryLabel: "How to Act on Findings"
 ---
 
 Severity scoring systems introduce consistency. They do not introduce context.

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection, type CollectionEntry } from "astro:content";
+import { getArticleStructuredData } from "../../lib/structuredData";
 
 type Post = CollectionEntry<"posts">;
 
@@ -20,32 +21,29 @@ const { Content } = await post.render();
 
 const title = `${post.data.title} | Sayyidi Shaarani`;
 const description = post.data.description;
+const primaryLabel = post.data.primaryLabel;
 
-// Foundational slugs (keep synced with notes index)
-const foundationalSlugs = [
-  "structured-inspection-differs-from-adversarial-simulation",
-  "how-the-owasp-top-10-informs-a-structured-inspection-model",
-  "limits-of-automated-vulnerability-scanning",
-  "severity-scores-mislead-decision-making",
-  "security-visibility-before-scale",
-];
-
-const isFoundational = foundationalSlugs.includes(post.slug);
-
-// More posts (latest 3 excluding current)
+// Related notes: prioritize same taxonomy label, then fill from the rest.
 const all = (await getCollection("posts")) as Post[];
-const more = all
-  .filter((p: Post) => !p.data.draft && p.slug !== post.slug)
-  .sort((a: Post, b: Post) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, 3);
+const published = all.filter((p: Post) => !p.data.draft && p.slug !== post.slug);
 
-// Type label mapping
-const typeLabel =
-  post.data.type === "framework"
-    ? "Framework Analysis"
-    : post.data.type === "practice"
-      ? "Inspection Practice"
-      : null;
+const sameLabel = published
+  .filter((p: Post) => p.data.primaryLabel === primaryLabel)
+  .sort((a: Post, b: Post) => a.data.title.localeCompare(b.data.title));
+
+const otherNotes = published
+  .filter((p: Post) => p.data.primaryLabel !== primaryLabel)
+  .sort((a: Post, b: Post) => a.data.title.localeCompare(b.data.title));
+
+const related = [...sameLabel, ...otherNotes].slice(0, 3);
+const structuredData = getArticleStructuredData({
+  path: `/notes/${post.slug}/`,
+  title: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.date,
+  primaryLabel: post.data.primaryLabel,
+  secondaryLabel: post.data.secondaryLabel,
+});
 ---
 
 <BaseLayout
@@ -53,41 +51,26 @@ const typeLabel =
   description={description}
   canonicalPath={`/notes/${post.slug}/`}
   ogType="article"
+  structuredData={structuredData}
 >
-  <article class="prose">
-    <!-- Back link -->
-    <p class="muted" style="margin-bottom: 1.25rem;">
-      <a href="/notes/" style="text-decoration:none;">← Research &amp; Notes</a>
+  <article class="note" aria-labelledby="note-title">
+    <p class="muted backLink">
+      <a href="/notes/">← Notes</a>
     </p>
 
-    <header>
-      <h1>{post.data.title}</h1>
+    <header class="noteHeader">
+      <h1 id="note-title">{post.data.title}</h1>
 
-      {isFoundational && (
-        <p class="label" style="margin-top:0.6rem;">
-          Part of the Structured Inspection Series
+      {post.data.series && (
+        <p class="seriesLine">
+          {post.data.series}
         </p>
       )}
 
-      {typeLabel && (
-        <p class="muted" style="margin-top:0.3rem; font-size:0.85rem;">
-          {typeLabel}
-        </p>
-      )}
-
-      <p class="muted" style="font-size:0.9rem; margin:0.5rem 0 0.75rem 0;">
-        {post.data.date.toLocaleDateString("en-MY", {
-          year: "numeric",
-          month: "short",
-          day: "2-digit",
-        })}
-        {post.data.tags && post.data.tags.length > 0 && (
-          <> · {post.data.tags.join(", ")}</>
-        )}
-      </p>
+      <p class="muted labelLine">Label: {primaryLabel}</p>
 
       {post.data.description && (
-        <p class="muted" style="margin: 0 0 1.5rem 0;">
+        <p class="muted summary">
           {post.data.description}
         </p>
       )}
@@ -99,15 +82,15 @@ const typeLabel =
 
     <div class="divider"></div>
 
-    <p class="muted">
-      <a href="/inspection/">Inspection model</a> · <a href="/notes/">All essays</a>
+    <p class="muted postNav">
+      <a href="/inspection/">Inspection model</a> · <a href="/notes/">All notes</a>
     </p>
 
-    {more.length > 0 && (
-      <section style="margin-top: 3rem;">
-        <p class="label">More Essays</p>
+    {related.length > 0 && (
+      <section class="moreNotes" aria-labelledby="related-notes-title">
+        <h2 id="related-notes-title">Related Notes</h2>
         <ul>
-          {more.map((p: Post) => (
+          {related.map((p: Post) => (
             <li>
               <a href={`/notes/${p.slug}/`}>{p.data.title}</a>
             </li>
@@ -117,3 +100,56 @@ const typeLabel =
     )}
   </article>
 </BaseLayout>
+
+<style>
+  .note {
+    margin-top: var(--space-3);
+  }
+
+  .backLink {
+    margin-bottom: 1.25rem;
+  }
+
+  .backLink a {
+    text-decoration: none;
+  }
+
+  .backLink a:hover {
+    text-decoration: underline;
+  }
+
+  .seriesLine {
+    margin-top: 0.6rem;
+    margin-bottom: 0;
+    font-size: 0.9rem;
+    color: var(--text);
+  }
+
+  .labelLine {
+    margin: 0.3rem 0 0.75rem;
+    font-size: 0.85rem;
+  }
+
+  .summary {
+    margin: 0 0 1.5rem;
+    max-width: 68ch;
+  }
+
+  .divider {
+    border-top: 1px solid var(--border);
+    margin: var(--space-3) 0;
+  }
+
+  .postNav {
+    margin-bottom: 0;
+  }
+
+  .moreNotes {
+    margin-top: var(--space-5);
+  }
+
+  .moreNotes h2 {
+    font-size: 1.02rem;
+    margin-bottom: 0.75rem;
+  }
+</style>
