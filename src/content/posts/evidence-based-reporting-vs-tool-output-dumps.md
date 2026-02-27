@@ -3,8 +3,9 @@ title: "Evidence-Based Reporting vs Tool Output Dumps"
 description: "Why structured inspection reporting differs from automated vulnerability output and why that distinction matters."
 date: 2026-03-10
 draft: false
-type: "practice"
-tags: ["reporting", "inspection-model", "methodology"]
+series: "Structured Inspection Series"
+primaryLabel: "How to Act on Findings"
+secondaryLabel: "How Inspection Works"
 ---
 
 Security reports are often judged by volume.

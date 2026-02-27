@@ -1,4 +1,6 @@
 ---
+import { inspectionScopeMailtoHref } from "../lib/contact";
+
 type NavItem = { href: string; label: string };
 
 const {
@@ -7,10 +9,10 @@ const {
   canonicalPath = "/",
   ogType = "website",
   ogImagePath = "/og.png",
+  structuredData = null,
 } = Astro.props;
 
 const DOMAIN = "https://sayyidishaarani.com";
-
 const safePath = (canonicalPath || "/").startsWith("/")
   ? canonicalPath
   : `/${canonicalPath}`;
@@ -23,22 +25,15 @@ const currentPath = Astro.url?.pathname || safePath;
  */
 const nav: NavItem[] = [
   { href: "/inspection/", label: "Inspection" },
-  { href: "/#about", label: "About" },
+  { href: "/about/", label: "About" },
   { href: "/notes/", label: "Notes" },
-  { href: "mailto:hello@sayyidishaarani.com", label: "Contact" },
+  { href: inspectionScopeMailtoHref, label: "Contact" },
 ];
 
 const isMailto = (href: string) => href.startsWith("mailto:");
-const isHashLink = (href: string) => href.includes("#");
-const stripHash = (href: string) => href.split("#")[0];
 
 const isCurrent = (href: string): boolean => {
   if (isMailto(href)) return false;
-
-  // Highlight About only when on homepage
-  if (isHashLink(href)) {
-    return currentPath === "/";
-  }
 
   const normalizedHref = href.endsWith("/") ? href : `${href}/`;
   const normalizedPath = currentPath.endsWith("/")
@@ -67,6 +62,12 @@ const isCurrent = (href: string): boolean => {
     <meta property="og:image" content={`${DOMAIN}${ogImagePath}`} />
 
     <meta name="twitter:card" content="summary" />
+    {structuredData && (
+      <script
+        type="application/ld+json"
+        set:html={JSON.stringify(structuredData)}
+      />
+    )}
 
     <style is:global>
       :root {
@@ -200,6 +201,47 @@ const isCurrent = (href: string): boolean => {
 
       .muted { color: var(--muted); }
 
+      .ctaRow {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-top: var(--space-3);
+      }
+
+      .cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.62rem 0.9rem;
+        border-radius: 10px;
+        border: 1px solid var(--border);
+        color: var(--text);
+        text-decoration: none;
+        font-size: 0.96rem;
+        line-height: 1.2;
+      }
+
+      .cta:hover {
+        text-decoration: none;
+        border-color: #c8c8c8;
+        background: var(--bg-soft);
+      }
+
+      .ctaPrimary {
+        background: var(--text);
+        color: #fff;
+        border-color: var(--text);
+      }
+
+      .ctaPrimary:hover {
+        background: #242424;
+        border-color: #242424;
+      }
+
+      .ctaSecondary {
+        background: var(--bg);
+      }
+
       hr {
         border: 0;
         border-top: 1px solid var(--border);
@@ -218,10 +260,32 @@ const isCurrent = (href: string): boolean => {
         color: var(--muted);
       }
 
+      footer.inner p {
+        margin: 0;
+      }
+
+      .footerLinks {
+        margin-top: 0.35rem;
+      }
+
+      .footerLinks a {
+        color: var(--muted);
+      }
+
+      .footerLinks a:hover {
+        color: var(--text);
+      }
+
       @media (max-width: 520px) {
         .siteHeader > .inner {
           flex-direction: column;
           align-items: flex-start;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .cta {
+          width: 100%;
         }
       }
     </style>
@@ -254,7 +318,11 @@ const isCurrent = (href: string): boolean => {
     </main>
 
     <footer class="inner">
-      © {new Date().getFullYear()} Sayyidi Shaarani
+      <p>© {new Date().getFullYear()} Sayyidi Shaarani</p>
+      <p class="footerLinks">
+        <a href="/inspection/">Inspection</a> · <a href="/notes/">Notes</a> ·
+        <a href="/boundaries/">Engagement Boundaries</a>
+      </p>
     </footer>
   </body>
 </html>

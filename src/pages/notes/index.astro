@@ -11,49 +11,120 @@ const description =
 const posts = (await getCollection("posts"))
   .filter((p: Post) => !p.data.draft)
   .sort((a: Post, b: Post) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const labelOrder = [
+  "When to Inspect",
+  "How Inspection Works",
+  "How to Act on Findings",
+  "Scope and Boundaries",
+];
+
+const labelsInUse = labelOrder.filter((label) =>
+  posts.some((post: Post) => post.data.primaryLabel === label)
+);
 ---
 
 <BaseLayout title={title} description={description} canonicalPath="/notes/">
-  <section>
-    <h1>Notes</h1>
+  <section class="notesIndex" aria-labelledby="notes-title">
+    <h1 id="notes-title">Notes</h1>
 
-    <p class="muted">
-      Applied security research and inspection notes. Structured observations on web application risk and assessment practice.
+    <p class="muted intro">
+      Reference notes on inspection methodology, risk visibility, and practical
+      security decision support.
     </p>
 
-    <hr />
+    {labelsInUse.length > 0 && (
+      <p class="muted taxonomyHint" aria-label="Current note labels">
+        Labels: {labelsInUse.join(" · ")}
+      </p>
+    )}
 
     {posts.length === 0 ? (
-      <p class="muted">Notes are published here as they are completed.</p>
+      <p class="muted">No notes published yet.</p>
     ) : (
-      posts.map((post: Post) => (
-        <article style="margin-bottom: 3rem;">
-          <h2 style="text-transform:none; letter-spacing:0; color:var(--text);">
-            <a href={`/notes/${post.slug}/`} style="text-decoration:none;">
-              {post.data.title}
-            </a>
-          </h2>
+      <div class="notesList">
+        {posts.map((post: Post) => (
+          <article class="noteItem" aria-labelledby={`note-${post.slug}`}>
+            <h2 id={`note-${post.slug}`}>
+              <a href={`/notes/${post.slug}/`}>{post.data.title}</a>
+            </h2>
 
-          <p class="muted" style="font-size:0.9rem;">
-            {post.data.date.toLocaleDateString("en-MY", {
-              year: "numeric",
-              month: "short",
-              day: "2-digit",
-            })}
-            {post.data.tags?.length > 0 && (
-              <> · {post.data.tags.join(", ")}</>
-            )}
-          </p>
+            <p class="meta" aria-label="Primary note label">
+              {post.data.primaryLabel}
+            </p>
 
-          <p>{post.data.description}</p>
+            <p class="noteSummary">{post.data.description}</p>
 
-          <p>
-            <a href={`/notes/${post.slug}/`}>Read →</a>
-          </p>
-
-          <hr />
-        </article>
-      ))
+            <p class="readLink">
+              <a href={`/notes/${post.slug}/`}>Read Note</a>
+            </p>
+          </article>
+        ))}
+      </div>
     )}
   </section>
 </BaseLayout>
+
+<style>
+  .notesIndex {
+    margin-top: var(--space-3);
+    max-width: 70ch;
+  }
+
+  .intro {
+    max-width: 64ch;
+    font-size: 1.02rem;
+    line-height: 1.62;
+    margin-bottom: var(--space-2);
+  }
+
+  .taxonomyHint {
+    margin: 0 0 var(--space-3);
+    font-size: 0.9rem;
+  }
+
+  .notesList {
+    border-top: 1px solid var(--border);
+    margin-top: var(--space-3);
+  }
+
+  .noteItem {
+    padding: var(--space-3) 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .noteItem h2 {
+    font-size: clamp(1.2rem, 2.1vw, 1.45rem);
+    text-transform: none;
+    letter-spacing: 0;
+    margin-bottom: 0.75rem;
+  }
+
+  .noteItem h2 a {
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .noteItem h2 a:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .meta {
+    margin: 0.2rem 0 0.55rem;
+    color: var(--muted);
+    font-size: 0.86rem;
+  }
+
+  .noteSummary {
+    max-width: 64ch;
+    line-height: 1.62;
+    margin: 0;
+  }
+
+  .readLink {
+    margin-top: 0.85rem;
+    margin-bottom: 0;
+    font-size: 0.94rem;
+  }
+</style>

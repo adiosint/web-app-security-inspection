@@ -3,8 +3,9 @@ title: "Why Structured Inspection Differs from Adversarial Simulation"
 description: "Clarifying the distinction between structured web application inspection and adversarial security simulation."
 date: 2026-03-02
 draft: false
-type: "framework"
-tags: ["inspection-model", "methodology", "security-testing"]
+series: "Structured Inspection Series"
+primaryLabel: "Scope and Boundaries"
+secondaryLabel: "How Inspection Works"
 ---
 
 Security work is often described through the language of attack. Red teams, breach simulations, exploit chains, persistence. These approaches have a defined purpose within mature security programs.

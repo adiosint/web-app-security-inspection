@@ -1,63 +1,112 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { inspectionScopeMailtoHref } from "../lib/contact";
+import { getServicePageStructuredData } from "../lib/structuredData";
 
 const title = "Sayyidi Shaarani";
 const description =
   "Independent web application security inspector. Security inspections and applied research.";
 
-const EMAIL = "hello@sayyidishaarani.com";
-const primaryCtaSubject = "Inspection Scope Request";
+const mailtoHref = inspectionScopeMailtoHref;
 
-const shortBody = `Target URL / environment:
-App type (1–2 lines):
-Preferred window:
-Authorized contact:`;
-
-const mailtoHref =
-  `mailto:${EMAIL}?subject=${encodeURIComponent(primaryCtaSubject)}&body=${encodeURIComponent(shortBody)}`;
+const structuredData = getServicePageStructuredData({
+  path: "/",
+  title,
+  description,
+});
 ---
 
-<BaseLayout title={title} description={description} canonicalPath="/">
-  <section class="homeHero">
-    <div class="stack tight">
-      <h1>Web Application Security Inspector</h1>
-      <p class="muted lede">Independent inspections for SMEs, startups, and NGOs.</p>
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath="/"
+  structuredData={structuredData}
+>
+  <section aria-labelledby="home-title" class="hero">
+    <h1 id="home-title">Web Application Security Inspection</h1>
+    <p class="lede">
+      For SMEs, startups, and NGOs that need clear visibility into application security risk.
+    </p>
+    <p>
+      I provide structured inspections with defined scope, proportionate validation, and
+      evidence-based reporting focused on practical remediation decisions.
+    </p>
 
-      <p class="lede">
-        I conduct structured web application inspections designed to provide clear, evidence-based visibility into security risk.
-        Engagements are defined in scope, proportionate in validation, and focused on actionable remediation guidance.
-      </p>
+    <ul class="points" aria-label="Inspection approach">
+      <li>Written scope and authorization before testing</li>
+      <li>Documented findings with traceable evidence</li>
+      <li>Actionable guidance aligned to operational constraints</li>
+    </ul>
 
-      <div class="ctaRow">
-        <a class="cta ctaPrimary" href={mailtoHref}>Discuss Inspection Scope</a>
-        <a class="cta" href="/inspection/">View Inspection Model</a>
-      </div>
-    </div>
+    <nav class="ctaRow" aria-label="Primary actions">
+      <a class="cta ctaPrimary" href={mailtoHref}>Discuss Inspection Scope</a>
+      <a class="cta ctaSecondary" href="/inspection/">View Inspection Model</a>
+    </nav>
+
+    <p class="muted meta">Typical duration: 1–2 weeks, depending on scope.</p>
   </section>
 
   <hr />
 
-  <!-- About anchor -->
-  <section id="about" class="homeBody">
-    <div class="stack">
-      <p>
-        My professional background includes enterprise cybersecurity operations, with focus on vulnerability management,
-        web application security testing, and governance-aligned risk validation.
-      </p>
-
-      <p class="muted">
-        The same disciplined approach is applied to smaller organizations that require structured risk visibility without
-        enterprise-scale overhead.
-      </p>
-    </div>
+  <section aria-labelledby="next-title">
+    <h2 id="next-title">Next Steps</h2>
+    <p>
+      Review the inspection model to confirm fit, then send scope details to begin a
+      structured discussion.
+    </p>
+    <p class="muted">Initial response is typically within one business day.</p>
+    <nav class="ctaRow" aria-label="Secondary actions">
+      <a class="cta ctaSecondary" href="/notes/">Read Notes</a>
+      <a class="cta ctaSecondary" href="/boundaries/">Engagement Boundaries</a>
+    </nav>
   </section>
 
-  <section class="homeLinks">
-    <div class="stack">
-      <div class="cluster">
-        <a class="cta" href="/notes/">Read Notes</a>
-        <a class="cta" href="/inspection/#model">Inspection model (summary)</a>
-      </div>
-    </div>
+  <section aria-labelledby="about-title">
+    <h2 id="about-title">About</h2>
+    <p>
+      Background and operating approach are documented on the dedicated About page.
+    </p>
+    <p><a href="/about/">View background and approach</a></p>
   </section>
 </BaseLayout>
+
+<style>
+  section {
+    margin: var(--space-5) 0;
+  }
+
+  .hero {
+    margin-top: var(--space-3);
+  }
+
+  .lede {
+    font-size: 1.08rem;
+    line-height: 1.55;
+    max-width: 62ch;
+    margin-bottom: var(--space-2);
+  }
+
+  .points {
+    margin: var(--space-3) 0;
+    padding-left: 1.15rem;
+  }
+
+  .points li {
+    margin-bottom: 0.45rem;
+  }
+
+  .meta {
+    margin-top: var(--space-2);
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 640px) {
+    section {
+      margin: var(--space-4) 0;
+    }
+
+    .hero {
+      margin-top: var(--space-2);
+    }
+  }
+</style>

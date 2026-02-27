@@ -2,9 +2,9 @@
 title: "How the OWASP Top 10 Informs a Structured Inspection Model"
 description: "Using the OWASP Top 10 as a reference layer within structured, evidence-based web application inspections."
 date: 2026-02-26
-draft: false
-type: "practice"
-tags: ["owasp", "inspection-model", "methodology"]
+draft: true
+series: "Structured Inspection Series"
+primaryLabel: "How Inspection Works"
 ---
 
 The OWASP Foundation maintains a widely referenced document known as the OWASP Top 10. It summarizes recurring categories of risk observed across modern web applications.

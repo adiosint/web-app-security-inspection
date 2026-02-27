@@ -3,8 +3,9 @@ title: "Security Visibility Before Scale"
 description: "Why structured risk visibility should precede growth in web application systems."
 date: 2026-03-06
 draft: false
-type: "interpretation"
-tags: ["risk-visibility", "inspection-model", "startups"]
+series: "Structured Inspection Series"
+primaryLabel: "When to Inspect"
+secondaryLabel: "How Inspection Works"
 ---
 
 Growth increases surface area before it increases maturity.
