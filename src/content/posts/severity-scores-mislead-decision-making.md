@@ -1,111 +1,58 @@
 ---
-title: "When Severity Scores Mislead Decision-Making"
-description: "Understanding the limits of numerical severity scoring in structured web application inspections."
+title: "Why Severity Scores Are Not Enough for Prioritization"
+description: "Why teams should use severity as one input, not the final fix order."
 date: 2026-03-04
 draft: true
 series: "Structured Inspection Series"
 primaryLabel: "How to Act on Findings"
 ---
 
-Severity scoring systems introduce consistency. They do not introduce context.
+Severity scores are useful for consistency, but they are not a complete prioritization method.
 
-Numerical ratings provide a shared language for describing technical impact and exploitability. They support comparison across findings. They reduce ambiguity in classification.
-
-They do not determine business priority.
-
-This distinction becomes critical in structured inspections, where interpretation must extend beyond a number.
+A score describes technical characteristics. It does not fully describe business consequence.
 
 ---
 
-## What Severity Scores Represent
+## What Severity Scores Help With
 
-Most scoring models evaluate combinations of factors such as:
+Severity frameworks help teams:
 
-- Technical impact  
-- Exploitability characteristics  
-- Required privileges  
-- User interaction  
-- Scope of effect  
+- Use a shared language
+- Compare findings in a structured way
+- Reduce reporting ambiguity
 
-The resulting value is a structured abstraction. It represents potential impact under generalized conditions.
-
-That abstraction is useful.
-
-It is not situational awareness.
+This is valuable for classification.
 
 ---
 
-## Where Misinterpretation Begins
+## Where Teams Can Go Wrong
 
-Problems arise when numerical scores are treated as automatic prioritization engines.
+Problems start when scores are treated as automatic task order.
 
-A high severity finding may demand attention in one environment and require measured response in another. A medium rating may represent minimal operational risk in one system and significant structural weakness in another.
+A high-scored issue may be constrained by strong safeguards. A medium-scored issue may be urgent if it affects core customer workflows.
 
-Severity categories describe vulnerability characteristics. They do not describe business consequence.
-
-Inspection must bridge that gap.
+Without context, priority decisions can be distorted.
 
 ---
 
-## Context Alters Meaning
+## What Else Should Inform Priority
 
-Consider two scenarios.
+Before deciding fix order, also assess:
 
-In the first, a “high severity” vulnerability affects a low-sensitivity internal administrative tool with limited access and compensating network controls.
+- External reachability
+- Data sensitivity
+- Impact on critical user actions
+- Existing controls and containment
+- Realistic misuse potential
 
-In the second, a “medium severity” access control flaw affects a publicly exposed application handling sensitive user data.
-
-The numerical labels do not communicate:
-
-- Data sensitivity  
-- Regulatory implications  
-- External reachability  
-- Role boundary complexity  
-- Operational safeguards  
-
-Without contextual interpretation, prioritization becomes detached from real risk.
+This gives a clearer picture of real risk.
 
 ---
 
-## Risk Is Not a Score
+## Practical Outcome
 
-In practice, structured inspection evaluates findings through additional lenses:
+Use severity to classify findings.
 
-- Exposure surface  
-- Authentication model integrity  
-- Authorization boundary stability  
-- Business criticality  
-- Potential for misuse under realistic conditions  
+Use context to prioritize remediation.
 
-These dimensions influence remediation order more reliably than numerical severity alone.
-
-Scoring supports categorization. It does not decide action.
-
----
-
-## The Operational Consequence
-
-When organizations rely exclusively on severity numbers, two outcomes are common.
-
-First, lower-scored structural weaknesses accumulate without attention. Over time, they create architectural fragility.
-
-Second, higher-scored but contextually constrained issues receive disproportionate focus.
-
-Both distort resource allocation.
-
-Structured inspection introduces interpretive discipline. Findings are classified using standardized language, then prioritized through contextual reasoning.
-
----
-
-## The Inspection Perspective
-
-Severity scoring remains useful. It enables consistent reporting and communication.
-
-However, inspection does not equate classification with priority.
-
-Priority emerges from context.
-
-Numbers describe characteristics.  
-Inspection interprets consequence.
-
-Over time, organizations that distinguish between scoring and prioritization make more stable security decisions than those who rely on numerical labels alone.
+Teams that separate these two steps usually make faster and more stable security decisions.

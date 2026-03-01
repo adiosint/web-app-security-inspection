@@ -6,7 +6,7 @@ type Post = CollectionEntry<"posts">;
 
 const title = "Notes | Sayyidi Shaarani";
 const description =
-  "Applied security research and inspection notes. Structured observations on web application risk and inspection practice.";
+  "Practical notes on web application security risk, inspection process, and follow-up decisions.";
 
 const posts = (await getCollection("posts"))
   .filter((p: Post) => !p.data.draft)
@@ -29,8 +29,8 @@ const labelsInUse = labelOrder.filter((label) =>
     <h1 id="notes-title">Notes</h1>
 
     <p class="muted intro">
-      Reference notes on inspection methodology, risk visibility, and practical
-      security decision support.
+      Practical notes on how inspections work, which risks matter most, and
+      how teams can act on findings.
     </p>
 
     {labelsInUse.length > 0 && (
@@ -67,14 +67,14 @@ const labelsInUse = labelOrder.filter((label) =>
 
 <style>
   .notesIndex {
-    margin-top: var(--space-3);
-    max-width: 70ch;
+    margin-top: 0;
+    max-width: 66ch;
   }
 
   .intro {
-    max-width: 64ch;
-    font-size: 1.02rem;
-    line-height: 1.62;
+    max-width: 62ch;
+    font-size: 1.04rem;
+    line-height: 1.66;
     margin-bottom: var(--space-2);
   }
 
@@ -117,8 +117,8 @@ const labelsInUse = labelOrder.filter((label) =>
   }
 
   .noteSummary {
-    max-width: 64ch;
-    line-height: 1.62;
+    max-width: 62ch;
+    line-height: 1.68;
     margin: 0;
   }
 

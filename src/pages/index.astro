@@ -7,8 +7,6 @@ const title = "Sayyidi Shaarani";
 const description =
   "Independent web application security inspector. Security inspections and applied research.";
 
-const mailtoHref = inspectionScopeMailtoHref;
-
 const structuredData = getServicePageStructuredData({
   path: "/",
   title,
@@ -25,88 +23,42 @@ const structuredData = getServicePageStructuredData({
   <section aria-labelledby="home-title" class="hero">
     <h1 id="home-title">Web Application Security Inspection</h1>
     <p class="lede">
-      For SMEs, startups, and NGOs that need clear visibility into application security risk.
+      For SMEs, startups, and NGOs that need a clear view of security risk in their web applications.
     </p>
     <p>
-      I provide structured inspections with defined scope, proportionate validation, and
-      evidence-based reporting focused on practical remediation decisions.
+      I provide structured inspections with clear scope, careful testing, and
+      plain-language reporting focused on practical fixes.
     </p>
 
     <ul class="points" aria-label="Inspection approach">
       <li>Written scope and authorization before testing</li>
-      <li>Documented findings with traceable evidence</li>
-      <li>Actionable guidance aligned to operational constraints</li>
+      <li>Findings documented with clear supporting evidence</li>
+      <li>Practical guidance that fits your team and timeline</li>
     </ul>
 
     <nav class="ctaRow" aria-label="Primary actions">
-      <a class="cta ctaPrimary" href={mailtoHref}>Discuss Inspection Scope</a>
-      <a class="cta ctaSecondary" href="/inspection/">View Inspection Model</a>
+      <a class="cta ctaPrimary" href={inspectionScopeMailtoHref}
+        >Request Inspection Scope Review</a
+      >
+      <a class="cta ctaSecondary" href="/inspection/">How Inspection Works</a>
     </nav>
 
     <p class="muted meta">Typical duration: 1–2 weeks, depending on scope.</p>
   </section>
-
-  <hr />
-
-  <section aria-labelledby="next-title">
-    <h2 id="next-title">Next Steps</h2>
-    <p>
-      Review the inspection model to confirm fit, then send scope details to begin a
-      structured discussion.
-    </p>
-    <p class="muted">Initial response is typically within one business day.</p>
-    <nav class="ctaRow" aria-label="Secondary actions">
-      <a class="cta ctaSecondary" href="/notes/">Read Notes</a>
-      <a class="cta ctaSecondary" href="/boundaries/">Engagement Boundaries</a>
-    </nav>
-  </section>
-
-  <section aria-labelledby="about-title">
-    <h2 id="about-title">About</h2>
-    <p>
-      Background and operating approach are documented on the dedicated About page.
-    </p>
-    <p><a href="/about/">View background and approach</a></p>
-  </section>
 </BaseLayout>
 
 <style>
-  section {
-    margin: var(--space-5) 0;
-  }
-
-  .hero {
-    margin-top: var(--space-3);
-  }
-
-  .lede {
-    font-size: 1.08rem;
-    line-height: 1.55;
-    max-width: 62ch;
-    margin-bottom: var(--space-2);
-  }
-
   .points {
     margin: var(--space-3) 0;
     padding-left: 1.15rem;
   }
 
-  .points li {
-    margin-bottom: 0.45rem;
+  .points li + li {
+    margin-top: 0.45rem;
   }
 
   .meta {
     margin-top: var(--space-2);
     font-size: 0.9rem;
-  }
-
-  @media (max-width: 640px) {
-    section {
-      margin: var(--space-4) 0;
-    }
-
-    .hero {
-      margin-top: var(--space-2);
-    }
   }
 </style>

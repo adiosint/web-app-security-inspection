@@ -1,10 +1,12 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { Image } from "astro:assets";
 import { getServicePageStructuredData } from "../../lib/structuredData";
+import portraitImage from "../../assets/images/sayyidi-portrait.jpg";
 
 const title = "About | Sayyidi Shaarani";
 const description =
-  "Professional background and operating approach for independent web application security inspections.";
+  "Background and working approach for independent web application security inspections.";
 
 const structuredData = getServicePageStructuredData({
   path: "/about/",
@@ -19,76 +21,149 @@ const structuredData = getServicePageStructuredData({
   canonicalPath="/about/"
   structuredData={structuredData}
 >
-  <section class="hero" aria-labelledby="about-title">
-    <h1 id="about-title">About</h1>
-    <p class="lede">
-      I provide independent web application security inspections for SMEs,
-      startups, and NGOs that need clear, evidence-based risk visibility.
-    </p>
-  </section>
+  <section class="aboutPage" aria-labelledby="about-title">
+    <div class="aboutIntro">
+      <h1 id="about-title">About</h1>
+      <p class="lede">
+        I provide independent web application security inspections for SMEs,
+        startups, and NGOs that need a clear view of security risks and what to fix first.
+      </p>
+      <h2 id="background-title">Professional Background</h2>
+      <p>
+        My background includes enterprise cybersecurity work, including
+        vulnerability management and web application testing.
+      </p>
+    </div>
 
-  <section aria-labelledby="background-title">
-    <h2 id="background-title">Professional Background</h2>
-    <p>
-      My background includes enterprise cybersecurity operations, with focus on
-      vulnerability management, web application security testing, and
-      governance-aligned risk validation.
-    </p>
-  </section>
+    <div class="aboutBottom">
+      <h2 id="approach-title">Operating Approach</h2>
+      <p>
+        I use a structured approach for smaller teams: clear scope, controlled
+        testing, and practical reporting.
+      </p>
+      <ul>
+        <li>Written scope and authorization before testing</li>
+        <li>Focused testing within agreed boundaries</li>
+        <li>Clear report with prioritized fix guidance</li>
+      </ul>
 
-  <section aria-labelledby="approach-title">
-    <h2 id="approach-title">Operating Approach</h2>
-    <p>
-      I apply an enterprise-tested inspection discipline to smaller teams:
-      defined scope, controlled validation, and practical reporting aligned to
-      operational constraints.
-    </p>
-    <ul>
-      <li>Written scope and authorization before testing</li>
-      <li>Proportionate validation within agreed boundaries</li>
-      <li>Actionable reporting focused on remediation decisions</li>
-    </ul>
-  </section>
+      <h2 id="navigation-title">Next Steps</h2>
+      <nav class="ctaRow" aria-label="About page actions">
+        <a class="cta ctaSecondary" href="/inspection/">How Inspection Works</a>
+        <a class="cta ctaSecondary" href="/boundaries/">Engagement Boundaries</a>
+      </nav>
+    </div>
 
-  <section aria-labelledby="navigation-title">
-    <h2 id="navigation-title">Next Steps</h2>
-    <nav class="ctaRow" aria-label="About page actions">
-      <a class="cta ctaSecondary" href="/inspection/">View Inspection Model</a>
-      <a class="cta ctaSecondary" href="/boundaries/">Engagement Boundaries</a>
-    </nav>
+    <aside class="aboutAside" aria-label="Profile">
+      <figure class="portrait">
+        <Image
+          src={portraitImage}
+          alt="Portrait of Sayyidi Shaarani"
+          widths={[320, 480, 640, 800, 960, 1200, 1440]}
+          sizes="(max-width: 760px) min(340px, calc(100vw - 2rem)), 300px"
+          format="jpg"
+          quality={94}
+          loading="eager"
+          class="portraitImage"
+        />
+      </figure>
+    </aside>
   </section>
 </BaseLayout>
 
 <style>
-  section {
-    margin: var(--space-5) 0;
+  .aboutPage {
+    margin-top: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(230px, 300px);
+    grid-template-areas:
+      "intro photo"
+      "bottom photo";
+    column-gap: clamp(var(--space-3), 4vw, var(--space-4));
+    row-gap: var(--space-3);
+    align-items: start;
   }
 
-  .hero {
-    margin-top: var(--space-3);
+  .aboutIntro {
+    grid-area: intro;
+    min-width: 0;
+    max-width: 64ch;
   }
 
-  .lede {
-    font-size: 1.08rem;
-    line-height: 1.55;
+  .aboutIntro > :where(h1, h2, p) {
     max-width: 62ch;
   }
 
-  ul {
-    padding-left: 1.2rem;
+  .aboutIntro h2 {
+    margin-top: var(--space-3);
   }
 
-  li + li {
+  .aboutBottom {
+    grid-area: bottom;
+    margin-top: 0;
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--border);
+    min-width: 0;
+    max-width: 64ch;
+  }
+
+  .aboutBottom h2:not(:first-of-type) {
+    margin-top: var(--space-3);
+  }
+
+  .aboutAside {
+    grid-area: photo;
+    min-width: 0;
+    justify-self: end;
+    align-self: start;
+    padding-top: 0.4rem;
+  }
+
+  .portrait {
+    margin: 0;
+    max-width: 300px;
+  }
+
+  .portrait :global(img.portraitImage) {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--bg-soft);
+  }
+
+  .aboutBottom ul {
+    padding-left: 1.2rem;
+    margin-top: 0.2rem;
+    margin-bottom: var(--space-2);
+  }
+
+  .aboutBottom li + li {
     margin-top: 0.35rem;
   }
 
-  @media (max-width: 640px) {
-    section {
-      margin: var(--space-4) 0;
+  @media (max-width: 760px) {
+    .aboutPage {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "intro"
+        "photo"
+        "bottom";
+      row-gap: var(--space-2);
     }
 
-    .hero {
-      margin-top: var(--space-2);
+    .portrait {
+      max-width: min(320px, 70vw);
+    }
+
+    .aboutBottom {
+      margin-top: 0;
+      padding-top: var(--space-2);
+    }
+
+    .aboutAside {
+      padding-top: 0;
     }
   }
 </style>

@@ -1,0 +1,85 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getServicePageStructuredData } from "../../lib/structuredData";
+
+const title = "Security Disclosure Policy | Sayyidi Shaarani";
+const description =
+  "Security disclosure policy and engagement boundaries.";
+
+const structuredData = getServicePageStructuredData({
+  path: "/disclosure/",
+  title,
+  description,
+});
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath="/disclosure/"
+  structuredData={structuredData}
+>
+  <section class="hero" aria-labelledby="disclosure-title">
+    <h1 id="disclosure-title">Security Disclosure Policy</h1>
+    <p>
+      This practice conducts web application security inspections strictly under defined scope and written authorization.
+    </p>
+    <p>
+      No active testing, automated scanning, exploitation, or validation of security weaknesses is performed without explicit permission from the system owner.
+    </p>
+
+    <h2>Scope &amp; Boundaries</h2>
+    <p>This policy applies only to work performed under formal engagement.</p>
+    <p>
+      This practice does not authorize or request unsolicited testing, scanning, or probing of any third-party systems.
+    </p>
+    <p>
+      If you believe a vulnerability exists in an organization’s system, you should contact the system owner directly or follow their published disclosure process.
+    </p>
+
+    <h2>Professional Conduct</h2>
+    <p>
+      All security engagements are governed by written scope, authorization, and mutually agreed boundaries.
+    </p>
+    <p>This reflects a commitment to lawful, ethical, and structured security practice.</p>
+
+    <h2>No Bug Bounty Program</h2>
+    <p>
+      This practice does not operate a public bug bounty program and does not provide monetary rewards for unsolicited vulnerability reports.
+    </p>
+
+    <h2>Reporting a Security Concern</h2>
+    <p>
+      If you wish to report a security concern related to work performed under this inspection practice, please contact:
+    </p>
+    <p><a href="mailto:salam@sayyidishaarani.com">salam@sayyidishaarani.com</a></p>
+    <p>
+      Please include sufficient technical detail to allow independent reproduction and validation of the issue. Reports should describe:
+    </p>
+    <ul>
+      <li>The affected asset or endpoint</li>
+      <li>The observed behavior</li>
+      <li>Steps to reproduce (if known)</li>
+      <li>Relevant timestamps or context</li>
+    </ul>
+    <p>Incomplete or speculative reports may not be actionable.</p>
+    <p class="muted">
+      Last updated: March 2026
+    </p>
+  </section>
+</BaseLayout>
+
+<style>
+  section {
+    max-width: 66ch;
+  }
+
+  .hero h2 {
+    margin-top: var(--space-3);
+  }
+
+  .hero ul {
+    margin-bottom: var(--space-3);
+  }
+
+</style>

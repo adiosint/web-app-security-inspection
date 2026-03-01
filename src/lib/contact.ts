@@ -1,18 +1,20 @@
-export const CONTACT_EMAIL = "hello@sayyidishaarani.com";
+export const CONTACT_EMAIL = "salam@sayyidishaarani.com";
 
-const inspectionScopeSubject = "Web Application Inspection — Scope Inquiry";
+const inspectionScopeSubject = "Inspection Scope Review — [Organization Name]";
 const inspectionScopeBody = [
-  "Hello Sayyidi,",
+  "I am requesting a structured inspection scope review.",
   "",
-  "I would like to discuss an inspection scope.",
+  "I confirm that I am authorized to request scope on behalf of the system owner.",
   "",
-  "- Target URL (or environment):",
-  "- Short application description:",
-  "- Preferred testing window:",
-  "- Point of contact who can authorize scope:",
+  "Target system URL(s) and environment (production / staging):",
   "",
-  "Regards,",
+  "Brief description of the application and its purpose:",
   "",
+  "Preferred testing window:",
+  "",
+  "Authorized contact (name, role, and email):",
+  "",
+  "This request is submitted for the purpose of defining scope and authorization prior to any assessment activity.",
 ].join("\r\n");
 
 export const inspectionScopeMailtoHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(

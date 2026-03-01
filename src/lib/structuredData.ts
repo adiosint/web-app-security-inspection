@@ -35,7 +35,7 @@ export const getServicePageStructuredData = ({
         "@id": PERSON_ID,
         name: "Sayyidi Shaarani",
         url: DOMAIN,
-        email: "mailto:hello@sayyidishaarani.com",
+        email: "mailto:salam@sayyidishaarani.com",
         jobTitle: "Web Application Security Inspector",
       },
       {

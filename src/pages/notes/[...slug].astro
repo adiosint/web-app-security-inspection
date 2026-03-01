@@ -83,7 +83,7 @@ const structuredData = getArticleStructuredData({
     <div class="divider"></div>
 
     <p class="muted postNav">
-      <a href="/inspection/">Inspection Model</a> · <a href="/notes/">All Notes</a>
+      <a href="/inspection/">How Inspection Works</a> · <a href="/notes/">All Notes</a>
     </p>
 
     {related.length > 0 && (
@@ -103,7 +103,8 @@ const structuredData = getArticleStructuredData({
 
 <style>
   .note {
-    margin-top: var(--space-3);
+    margin-top: 0;
+    max-width: 66ch;
   }
 
   .backLink {
@@ -132,7 +133,25 @@ const structuredData = getArticleStructuredData({
 
   .summary {
     margin: 0 0 1.5rem;
-    max-width: 68ch;
+    max-width: 62ch;
+  }
+
+  .note :global(hr) {
+    margin: var(--space-4) 0;
+  }
+
+  .note :global(h2) {
+    margin-top: var(--space-3);
+  }
+
+  .note :global(p),
+  .note :global(li) {
+    line-height: 1.74;
+  }
+
+  .note :global(ul),
+  .note :global(ol) {
+    margin-bottom: var(--space-3);
   }
 
   .divider {
@@ -145,7 +164,7 @@ const structuredData = getArticleStructuredData({
   }
 
   .moreNotes {
-    margin-top: var(--space-5);
+    margin-top: var(--space-4);
   }
 
   .moreNotes h2 {

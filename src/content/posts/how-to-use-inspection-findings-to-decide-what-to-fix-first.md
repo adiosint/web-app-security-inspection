@@ -1,6 +1,6 @@
 ---
-title: "How to Use Inspection Findings to Decide What to Fix First"
-description: "A practical method for turning inspection findings into a clear remediation order."
+title: "How to Decide What to Fix First After an Inspection"
+description: "A simple method for turning inspection findings into a practical fix order."
 date: 2026-02-27
 draft: false
 series: "Structured Inspection Series"
@@ -8,108 +8,84 @@ primaryLabel: "How to Act on Findings"
 secondaryLabel: "How Inspection Works"
 ---
 
-Security teams and non-technical decision makers often receive the same report but leave with different priorities.
+After an inspection, teams often ask the same question: what should we fix first?
 
-That is usually not a technical problem. It is a decision-structure problem.
-
-Inspection findings become useful only when they are translated into a remediation order that fits operational reality.
+The answer is usually not "the longest list" or "the highest number only." It is the issue that creates the highest real-world risk in your environment.
 
 ---
 
-## Start With Exposure, Not Volume
+## Start With Exposure
 
-Count does not determine urgency.
+Begin with simple questions:
 
-A long list of low-impact observations can distract attention from one control weakness that materially changes risk.
+- Is the issue reachable from the internet?
+- Does it affect sensitive data or critical actions?
+- Can it be misused without unusual conditions?
 
-Start by asking:
-
-- Is the weakness externally reachable?
-- Does it affect sensitive data or privileged actions?
-- Can misuse occur without unusual preconditions?
-
-If the answer is yes to most of the above, the item belongs near the top of the plan.
+If most answers are yes, that item should be near the top of your plan.
 
 ---
 
-## Separate Structural Risk From Hygiene
+## Separate High-Impact Issues From Hygiene
 
-Not all findings are equal in consequence.
+Not all findings have the same consequence.
 
-Structural issues usually deserve earlier action because they can affect many workflows at once.
+Higher-impact structural issues usually come first, such as:
 
-Examples:
+- Access control weaknesses
+- Authentication weaknesses
+- Broken trust between services
 
-- Access control gaps across role boundaries
-- Authentication logic weaknesses
-- Insecure trust assumptions between services
-
-Hygiene issues are still important, but they can often be sequenced behind high-impact structural fixes.
-
-Examples:
-
-- Minor header hardening gaps
-- Non-critical informational disclosures
-- Low-value configuration cleanup
+Routine hygiene items still matter, but can often be scheduled after high-impact fixes.
 
 ---
 
-## Use a Four-Bucket Remediation Order
+## Use a Simple Priority Model
 
-A simple and consistent ordering model helps teams move from debate to execution.
+A four-step order keeps decisions clear:
 
 1. Immediate containment  
-Issues that can be actively misused with high consequence.
+Issues with high consequence and active misuse potential.
 
 2. Near-term structural fixes  
-Weaknesses that materially affect boundary integrity or critical workflow safety.
+Weaknesses that affect important workflows or boundary integrity.
 
 3. Planned control improvements  
-Findings that improve resilience but are not immediate misuse paths.
+Important improvements that are not immediate misuse paths.
 
-4. Routine hygiene and maintenance  
-Low-impact cleanup that should still be tracked and completed.
-
-The objective is not perfect precision. The objective is disciplined sequencing.
+4. Routine maintenance  
+Low-impact cleanup that should still be tracked.
 
 ---
 
-## Add Operational Reality Before Finalizing Priority
+## Add Operational Reality
 
-A technically severe issue may not be the first engineering action if a short-term containment already exists.
+Before finalizing priorities, confirm:
 
-Likewise, a moderate technical finding may become urgent if it affects a core transaction path.
+- Business criticality
+- Existing temporary controls
+- Deployment and rollback risk
+- Time needed to verify the fix safely
 
-Before finalizing order, confirm:
-
-- Business process criticality
-- Existing compensating controls
-- Deployment complexity and rollback risk
-- Time needed to safely verify fixes
-
-This step prevents remediation plans from becoming technically correct but operationally unrealistic.
+This prevents plans that are technically correct but hard to execute.
 
 ---
 
-## Define “Done” Per Finding
+## Define Done
 
-Priority without closure criteria creates endless status updates.
-
-For each high-priority item, define:
+For each high-priority finding, define:
 
 - Owner
-- Change scope
+- Scope of change
 - Validation method
 - Target completion window
 
-Inspection reports support this process, but delivery confidence depends on whether teams convert findings into clear execution tasks.
+Priority is useful only when it leads to completed work.
 
 ---
 
 ## Practical Outcome
 
-The goal is not to fix everything immediately.
+The goal is to reduce meaningful risk quickly, then improve controls in a stable sequence.
 
-The goal is to reduce material risk quickly, then improve control quality in a stable sequence.
-
-When organizations apply this approach consistently, remediation becomes clearer, faster, and less reactive.
+When teams use a consistent approach, remediation becomes faster, clearer, and less reactive.

@@ -8,7 +8,7 @@ import { getServicePageStructuredData } from "../../lib/structuredData";
 
 const title = "Security Inspections for Web Applications | Sayyidi Shaarani";
 const description =
-  "Security inspections for web applications. For SMEs, startups, and NGOs seeking structured risk visibility. Defined scope, controlled assessment, clear reporting.";
+  "Security inspections for web applications. For SMEs, startups, and NGOs that need a clear view of risk. Clear scope, careful testing, and plain-language reporting.";
 
 const mailtoHref = inspectionScopeMailtoHref;
 
@@ -28,12 +28,11 @@ const structuredData = getServicePageStructuredData({
   <!-- HERO -->
   <section id="hero" class="hero">
     <h1>Security Inspections for Web Applications</h1>
-    <p class="kicker">by Sayyidi Shaarani</p>
-    <p class="lede">For SMEs, startups, and NGOs seeking structured risk visibility.</p>
+    <p class="lede">For SMEs, startups, and NGOs that need a clear view of web application security risk.</p>
 
     <nav class="ctaRow" aria-label="Primary inspection actions">
-      <a class="cta ctaPrimary" href={mailtoHref}>Discuss Inspection Scope</a>
-      <a class="cta ctaSecondary" href="#model">View Inspection Model</a>
+      <a class="cta ctaPrimary" href={mailtoHref}>Request Inspection Scope Review</a>
+      <a class="cta ctaSecondary" href="#model">How Inspection Works</a>
     </nav>
 
     <p class="muted meta">
@@ -43,29 +42,30 @@ const structuredData = getServicePageStructuredData({
 
   <!-- MODEL -->
   <section id="model">
-    <h2>Structured Inspection Model</h2>
+    <h2>How the Inspection Works</h2>
+    <p class="muted">A clear step-by-step process so teams know what will happen and why.</p>
 
     <div class="grid two">
       <div class="card">
-        <h3>Scope &amp; Authorization</h3>
-        <p class="muted">Boundaries and authorization defined before testing begins.</p>
+        <h3>Agree Scope and Permission</h3>
+        <p class="muted">We define what will be reviewed and confirm written authorization before testing starts.</p>
       </div>
 
       <div class="card">
-        <h3>External Exposure Review</h3>
-        <p class="muted">Assessment of publicly reachable exposure and configuration posture.</p>
+        <h3>Check What Is Publicly Exposed</h3>
+        <p class="muted">We review what is reachable from the public internet and flag obvious risks.</p>
       </div>
 
       <div class="card">
-        <h3>Structured Application Testing</h3>
+        <h3>Test Core Security Areas</h3>
         <p class="muted">
-          Evaluation of authentication, access control, input handling, and business logic within scope.
+          We test key areas such as login, account access, user input, and important user actions within scope.
         </p>
       </div>
 
       <div class="card">
-        <h3>Risk Report &amp; Advisory</h3>
-        <p class="muted">Categorized findings with remediation guidance.</p>
+        <h3>Deliver a Clear Action Report</h3>
+        <p class="muted">You receive prioritized findings with practical steps your team can act on.</p>
       </div>
     </div>
   </section>
@@ -74,14 +74,14 @@ const structuredData = getServicePageStructuredData({
   <section id="who">
     <h2>Who This Is For</h2>
     <p class="muted">
-      Typical engagement profiles include customer-facing platforms where
-      application changes can outpace formal risk visibility.
+      Designed for organizations that run web applications and need clear security guidance
+      without heavy technical language.
     </p>
     <ul>
-      <li>SMEs operating customer-facing applications</li>
+      <li>SMEs running customer websites and web apps</li>
       <li>Startups iterating rapidly</li>
       <li>NGOs handling sensitive data</li>
-      <li>Teams preparing for growth with limited internal security capacity</li>
+      <li>Teams growing quickly with limited internal security support</li>
     </ul>
   </section>
 
@@ -93,19 +93,19 @@ const structuredData = getServicePageStructuredData({
       <div class="card">
         <h3>What This Is</h3>
         <ul>
-          <li>Defined scope</li>
-          <li>Controlled assessment</li>
-          <li>Clear documentation</li>
-          <li>Practical guidance</li>
+          <li>Clear scope before testing starts</li>
+          <li>Focused testing within agreed boundaries</li>
+          <li>Clear written documentation</li>
+          <li>Practical guidance for your team</li>
         </ul>
       </div>
 
       <div class="card">
         <h3>What This Is Not</h3>
         <ul>
-          <li>No simulated breach demonstrations</li>
-          <li>No unreviewed automated reports</li>
-          <li>Not a regulatory audit</li>
+          <li>No staged attack demo exercises</li>
+          <li>No raw automated scan output without review</li>
+          <li>Not a formal compliance audit</li>
         </ul>
       </div>
     </div>
@@ -116,10 +116,10 @@ const structuredData = getServicePageStructuredData({
     <h2>Report Includes</h2>
     <div class="callout">
       <ul>
-        <li>Executive summary</li>
-        <li>Risk table</li>
-        <li>Structured findings</li>
-        <li>Remediation guidance</li>
+        <li>Simple summary in plain language</li>
+        <li>Prioritized risk list</li>
+        <li>Findings with supporting evidence</li>
+        <li>Practical fix recommendations</li>
       </ul>
     </div>
   </section>
@@ -128,86 +128,36 @@ const structuredData = getServicePageStructuredData({
   <section id="contact-flow">
     <h2>After You Email</h2>
     <ol>
-      <li>Scope-fit response, typically within one business day</li>
-      <li>Short scoping call to define targets, boundaries, and timing</li>
+      <li>Initial reply, typically within one business day</li>
+      <li>Short call to confirm what to test and when</li>
       <li>Written scope and authorization before any testing activity</li>
     </ol>
   </section>
 
-  <!-- ENGAGEMENT -->
-  <section id="engagement">
-    <h2>Engagement</h2>
-    <ol>
-      <li>Intro call</li>
-      <li>Written scope</li>
-      <li>Inspection window</li>
-      <li>Report delivery</li>
-      <li>Advisory review</li>
-    </ol>
-    <p class="muted">Typical duration: 1–2 weeks, depending on scope.</p>
-
-    <nav class="ctaRow" aria-label="Engagement actions">
-      <a class="cta ctaPrimary" href={mailtoHref}>Discuss Inspection Scope</a>
-      <a class="cta ctaSecondary" href="/boundaries/">Professional Boundaries</a>
-    </nav>
-  </section>
-
-  <!-- BOUNDARIES -->
-  <section id="boundaries">
-    <h2>Professional Boundaries</h2>
-    <p>
-      Inspection activity is limited to written scope, authorization, and
-      agreed testing windows.
-    </p>
-    <p class="muted">
-      Full reference: <a href="/boundaries/">Engagement Boundaries</a>
-    </p>
-  </section>
-
   <!-- CONTACT -->
   <section id="contact">
-    <h2>Discuss Inspection Scope</h2>
-
-    <p>Email: <a href={mailtoHref}>{CONTACT_EMAIL}</a></p>
-
-    <div class="callout">
-      <p><strong>Include:</strong></p>
-      <ul>
-        <li>Target URL (or environment)</li>
-        <li>Short application description</li>
-        <li>Preferred testing window</li>
-        <li>Point of contact who can authorize scope</li>
-      </ul>
-    </div>
+    <h2>Request an Inspection Scope Review</h2>
+    <p>Security inspections begin with written authorization and a defined scope discussion.</p>
+    <p>No testing, scanning, or validation activity is conducted before scope and permission are confirmed.</p>
 
     <nav class="ctaRow" aria-label="Contact actions">
-      <a class="cta ctaPrimary" href={mailtoHref}>Discuss Inspection Scope</a>
-      <a class="cta ctaSecondary" href="#model">View Inspection Model</a>
+      <a class="cta ctaPrimary" href={mailtoHref}>Request Inspection Scope Review</a>
+      <a class="cta ctaSecondary" href="#model">How Inspection Works</a>
     </nav>
+
+    <aside class="contactGovernance muted" aria-label="Engagement governance">
+      <p>
+        See the <a href="/disclosure/">Security Disclosure Policy</a> for governance terms.
+      </p>
+      <p>
+        For preliminary inquiries, you may also email
+        <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> directly.
+      </p>
+    </aside>
   </section>
 </BaseLayout>
 
 <style>
-  section {
-    margin: var(--space-5) 0;
-  }
-
-  .hero {
-    margin-top: var(--space-3);
-  }
-
-  .kicker {
-    margin-bottom: 0.5rem;
-    color: var(--muted);
-    font-size: 0.88rem;
-  }
-
-  .lede {
-    font-size: 1.08rem;
-    line-height: 1.55;
-    max-width: 62ch;
-  }
-
   .meta {
     margin-top: 0.75rem;
     font-size: 0.9rem;
@@ -232,6 +182,13 @@ const structuredData = getServicePageStructuredData({
     font-size: 1.05rem;
   }
 
+  @media (min-width: 780px) {
+    .grid.two {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-3);
+    }
+  }
+
   .callout {
     border: 1px solid var(--border);
     border-radius: 12px;
@@ -248,13 +205,19 @@ const structuredData = getServicePageStructuredData({
     margin-top: 0.35rem;
   }
 
-  @media (max-width: 640px) {
-    section {
-      margin: var(--space-4) 0;
-    }
-
-    .hero {
-      margin-top: var(--space-2);
-    }
+  .contactGovernance {
+    margin-top: calc(var(--space-2) + 0.3rem);
+    max-width: 62ch;
+    font-size: 0.9rem;
+    line-height: 1.66;
   }
+
+  .contactGovernance p {
+    margin-bottom: 0.65rem;
+  }
+
+  .contactGovernance p:last-child {
+    margin-bottom: 0;
+  }
+
 </style>
