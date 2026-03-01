@@ -24,15 +24,17 @@ const structuredData = getServicePageStructuredData({
   <section class="aboutPage" aria-labelledby="about-title">
     <div class="aboutIntro">
       <h1 id="about-title">About</h1>
-      <p class="lede">
-        I provide independent web application security inspections for SMEs,
-        startups, and NGOs that need a clear view of security risks and what to fix first.
-      </p>
-      <h2 id="background-title">Professional Background</h2>
-      <p>
-        My background includes enterprise cybersecurity work, including
-        vulnerability management and web application testing.
-      </p>
+      <div class="aboutIntroBody">
+        <p class="lede">
+          I provide independent web application security inspections for SMEs,
+          startups, and NGOs that need a clear view of security risks and what to fix first.
+        </p>
+        <h2 id="background-title">Professional Background</h2>
+        <p>
+          My background includes enterprise cybersecurity work, including
+          vulnerability management and web application testing.
+        </p>
+      </div>
     </div>
 
     <div class="aboutBottom">
@@ -89,11 +91,12 @@ const structuredData = getServicePageStructuredData({
     max-width: 64ch;
   }
 
-  .aboutIntro > :where(h1, h2, p) {
+  .aboutIntro > :where(h1, h2, p),
+  .aboutIntroBody > :where(h2, p) {
     max-width: 62ch;
   }
 
-  .aboutIntro h2 {
+  .aboutIntroBody h2 {
     margin-top: var(--space-3);
   }
 
@@ -146,10 +149,25 @@ const structuredData = getServicePageStructuredData({
     .aboutPage {
       grid-template-columns: 1fr;
       grid-template-areas:
-        "intro"
+        "heading"
         "photo"
+        "intro"
         "bottom";
       row-gap: var(--space-2);
+    }
+
+    .aboutIntro {
+      display: contents;
+    }
+
+    .aboutIntro > h1 {
+      grid-area: heading;
+      max-width: 62ch;
+      margin-bottom: 0;
+    }
+
+    .aboutIntroBody {
+      grid-area: intro;
     }
 
     .portrait {
@@ -163,6 +181,7 @@ const structuredData = getServicePageStructuredData({
 
     .aboutAside {
       padding-top: 0;
+      justify-self: center;
     }
   }
 </style>
