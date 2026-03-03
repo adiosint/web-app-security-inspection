@@ -1,8 +1,15 @@
 const DOMAIN = "https://sayyidishaarani.com";
 const PERSON_ID = `${DOMAIN}/#person`;
 const SERVICE_ID = `${DOMAIN}/#service`;
+const LINKEDIN_URL = "https://www.linkedin.com/in/sayyidishaarani/";
 
 type ServicePageInput = {
+  path: string;
+  title: string;
+  description: string;
+};
+
+type WebPageInput = {
   path: string;
   title: string;
   description: string;
@@ -37,16 +44,16 @@ export const getServicePageStructuredData = ({
         url: DOMAIN,
         email: "mailto:salam@sayyidishaarani.com",
         jobTitle: "Web Application Security Inspector",
+        sameAs: [LINKEDIN_URL],
       },
       {
         "@type": "ProfessionalService",
         "@id": SERVICE_ID,
         name: "Sayyidi Shaarani — Web Application Security Inspection",
         url: DOMAIN,
-        areaServed: "Global",
         serviceType: "Web application security inspection",
         description:
-          "Independent web application security inspection for SMEs, startups, and NGOs.",
+          "Web application security inspection for SMEs, startups, and NGOs.",
         provider: { "@id": PERSON_ID },
       },
       {
@@ -56,6 +63,38 @@ export const getServicePageStructuredData = ({
         name: title,
         description,
         about: { "@id": SERVICE_ID },
+      },
+    ],
+  };
+};
+
+export const getWebPageStructuredData = ({
+  path,
+  title,
+  description,
+}: WebPageInput) => {
+  const safePath = withLeadingSlash(path);
+  const url = `${DOMAIN}${safePath}`;
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": PERSON_ID,
+        name: "Sayyidi Shaarani",
+        url: DOMAIN,
+        email: "mailto:salam@sayyidishaarani.com",
+        jobTitle: "Web Application Security Inspector",
+        sameAs: [LINKEDIN_URL],
+      },
+      {
+        "@type": "WebPage",
+        "@id": `${url}#webpage`,
+        url,
+        name: title,
+        description,
+        about: { "@id": PERSON_ID },
       },
     ],
   };
@@ -83,7 +122,6 @@ export const getArticleStructuredData = ({
     publisher: { "@id": PERSON_ID },
     mainEntityOfPage: url,
     datePublished: published,
-    dateModified: published,
     articleSection: primaryLabel,
     keywords,
   };

@@ -1,7 +1,7 @@
 ---
 title: "Clear Security Reports vs Raw Tool Output"
 description: "Why clear inspection reporting is more useful than raw scanner output alone."
-date: 2026-03-10
+date: 2026-02-28
 draft: false
 series: "Structured Inspection Series"
 primaryLabel: "How to Act on Findings"

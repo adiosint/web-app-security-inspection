@@ -1,7 +1,7 @@
 ---
 title: "Why Severity Scores Are Not Enough for Prioritization"
 description: "Why teams should use severity as one input, not the final fix order."
-date: 2026-03-04
+date: 2026-02-25
 draft: true
 series: "Structured Inspection Series"
 primaryLabel: "How to Act on Findings"

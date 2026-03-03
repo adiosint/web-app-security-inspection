@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { inspectionScopeMailtoHref } from "../../lib/contact";
-import { getServicePageStructuredData } from "../../lib/structuredData";
+import { getWebPageStructuredData } from "../../lib/structuredData";
 
 const title = "Engagement Boundaries | Sayyidi Shaarani";
 const description =
@@ -9,7 +9,7 @@ const description =
 
 const mailtoHref = inspectionScopeMailtoHref;
 
-const structuredData = getServicePageStructuredData({
+const structuredData = getWebPageStructuredData({
   path: "/boundaries/",
   title,
   description,
@@ -77,7 +77,7 @@ const structuredData = getServicePageStructuredData({
       </ul>
     </div>
     <nav class="ctaRow" aria-label="Boundaries page actions">
-      <a class="cta ctaPrimary" href={mailtoHref}>Request Inspection Scope Review</a>
+      <a class="cta ctaPrimary" href={mailtoHref}>Request Scope Review</a>
       <a class="cta ctaSecondary" href="/inspection/">How Inspection Works</a>
     </nav>
   </section>

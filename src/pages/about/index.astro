@@ -1,14 +1,15 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { Image } from "astro:assets";
-import { getServicePageStructuredData } from "../../lib/structuredData";
+import { inspectionScopeMailtoHref } from "../../lib/contact";
+import { getWebPageStructuredData } from "../../lib/structuredData";
 import portraitImage from "../../assets/images/sayyidi-portrait.jpg";
 
-const title = "About | Sayyidi Shaarani";
+const title = "About the Practice | Sayyidi Shaarani";
 const description =
-  "Background and working approach for independent web application security inspections.";
+  "How I approach web application security inspections and what it is like to work together.";
 
-const structuredData = getServicePageStructuredData({
+const structuredData = getWebPageStructuredData({
   path: "/about/",
   title,
   description,
@@ -22,108 +23,161 @@ const structuredData = getServicePageStructuredData({
   structuredData={structuredData}
 >
   <section class="aboutPage" aria-labelledby="about-title">
-    <div class="aboutIntro">
-      <h1 id="about-title">About</h1>
-      <div class="aboutIntroBody">
-        <p class="lede">
-          I provide independent web application security inspections for SMEs,
-          startups, and NGOs that need a clear view of security risks and what to fix first.
-        </p>
-        <h2 id="background-title">Professional Background</h2>
-        <p>
-          My background includes enterprise cybersecurity work, including
-          vulnerability management and web application testing.
-        </p>
-      </div>
-    </div>
+    <figure class="portrait" aria-label="Profile">
+      <Image
+        src={portraitImage}
+        alt="Portrait of Sayyidi Shaarani"
+        widths={[320, 480, 640, 800, 960, 1200, 1440]}
+        sizes="(max-width: 760px) min(340px, calc(100vw - 2rem)), 320px"
+        format="jpg"
+        quality={94}
+        loading="eager"
+        class="portraitImage"
+      />
+    </figure>
 
-    <div class="aboutBottom">
-      <h2 id="approach-title">Operating Approach</h2>
-      <p>
-        I use a structured approach for smaller teams: clear scope, controlled
-        testing, and practical reporting.
+    <div class="aboutBody">
+      <h1 id="about-title">About</h1>
+      <p class="lede">
+        I help organizations get a clear, actionable view of web application
+        security risk and what to fix first.
       </p>
+      <p>
+        Security work should reduce uncertainty, not add more confusion. My
+        goal is to make risk understandable, prioritized, and practical to
+        address.
+      </p>
+
+      <h2 id="background-title">Professional Background</h2>
+      <p>
+        My experience includes hands-on security operations, vulnerability
+        management, and web application security testing.
+      </p>
+      <p>
+        In those environments, findings are only useful when they are validated
+        with evidence, classified consistently, and documented clearly for
+        action.
+      </p>
+      <div class="profileLink">
+        <a
+          class="socialLink"
+          href="https://www.linkedin.com/in/sayyidishaarani/"
+          rel="me noopener noreferrer"
+          target="_blank"
+          title="LinkedIn"
+          aria-label="Visit LinkedIn profile (opens in a new tab)"
+        >
+          <svg
+            class="socialIcon"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path
+              fill="currentColor"
+              d="M22.225 0H1.771A1.75 1.75 0 000 1.729v20.542A1.75 1.75 0 001.771 24h20.451A1.75 1.75 0 0024 22.271V1.729A1.75 1.75 0 0022.225 0zM7.119 20.452H3.555V9h3.564v11.452zM5.337 7.433a2.063 2.063 0 110-4.126 2.063 2.063 0 010 4.126zM20.447 20.452H16.89v-5.569c0-1.329-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.346V9h3.414v1.561h.049c.476-.9 1.637-1.85 3.37-1.85 3.605 0 4.27 2.372 4.27 5.455v6.286z"
+            />
+          </svg>
+        </a>
+      </div>
+
+      <h2 id="practice-title">Inspection Practice</h2>
+      <p>
+        I apply those same standards in inspections for SMEs,
+        startups, and NGOs, especially teams that do not have dedicated internal
+        security specialists.
+      </p>
+
+      <h2 id="approach-title">How I Work With Teams</h2>
       <ul>
-        <li>Written scope and authorization before testing</li>
-        <li>Focused testing within agreed boundaries</li>
-        <li>Clear report with prioritized fix guidance</li>
+        <li>We confirm scope and authorization before any testing starts</li>
+        <li>Testing stays controlled, non-destructive, and within agreed boundaries</li>
+        <li>I report only confirmed issues, not speculative noise</li>
+        <li>Every confirmed issue includes practical remediation guidance</li>
       </ul>
 
-      <h2 id="navigation-title">Next Steps</h2>
+      <h2 id="next-steps-title">Next Step</h2>
+      <p>
+        If this approach fits your team, the first step is a scope review to
+        confirm target systems, boundaries, and authorization.
+      </p>
       <nav class="ctaRow" aria-label="About page actions">
+        <a class="cta ctaPrimary" href={inspectionScopeMailtoHref}
+          >Request Scope Review</a
+        >
         <a class="cta ctaSecondary" href="/inspection/">How Inspection Works</a>
-        <a class="cta ctaSecondary" href="/boundaries/">Engagement Boundaries</a>
       </nav>
     </div>
-
-    <aside class="aboutAside" aria-label="Profile">
-      <figure class="portrait">
-        <Image
-          src={portraitImage}
-          alt="Portrait of Sayyidi Shaarani"
-          widths={[320, 480, 640, 800, 960, 1200, 1440]}
-          sizes="(max-width: 760px) min(340px, calc(100vw - 2rem)), 300px"
-          format="jpg"
-          quality={94}
-          loading="eager"
-          class="portraitImage"
-        />
-      </figure>
-    </aside>
   </section>
 </BaseLayout>
 
 <style>
   .aboutPage {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(230px, 300px);
-    grid-template-areas:
-      "intro photo"
-      "bottom photo";
-    column-gap: clamp(var(--space-3), 4vw, var(--space-4));
-    row-gap: var(--space-3);
-    align-items: start;
+    max-width: 72ch;
+    margin-inline: auto;
   }
 
-  .aboutIntro {
-    grid-area: intro;
-    min-width: 0;
-    max-width: 64ch;
+  .aboutBody {
+    max-width: 66ch;
+    margin-inline: auto;
+    margin-top: var(--space-1);
   }
 
-  .aboutIntro > :where(h1, h2, p),
-  .aboutIntroBody > :where(h2, p) {
-    max-width: 62ch;
-  }
-
-  .aboutIntroBody h2 {
+  .aboutBody h2 {
     margin-top: var(--space-3);
   }
 
-  .aboutBottom {
-    grid-area: bottom;
+  .aboutBody ul {
+    padding-left: 1.2rem;
+    margin-top: 0.2rem;
+    margin-bottom: var(--space-2);
+  }
+
+  .aboutBody li + li {
+    margin-top: 0.35rem;
+  }
+
+  .profileLink {
     margin-top: 0;
-    padding-top: var(--space-3);
-    border-top: 1px solid var(--border);
-    min-width: 0;
-    max-width: 64ch;
+    margin-bottom: var(--space-2);
   }
 
-  .aboutBottom h2:not(:first-of-type) {
-    margin-top: var(--space-3);
+  .socialLink {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--bg-soft);
+    color: var(--text);
+    text-decoration: none;
+    line-height: 1.2;
   }
 
-  .aboutAside {
-    grid-area: photo;
-    min-width: 0;
-    justify-self: end;
-    align-self: start;
-    padding-top: 0.4rem;
+  .socialLink:hover {
+    text-decoration: none;
+    border-color: var(--border-strong);
+    background: var(--bg);
+  }
+
+  .socialLink:focus-visible {
+    outline: 2px solid var(--text);
+    outline-offset: 3px;
+  }
+
+  .socialIcon {
+    width: 1rem;
+    height: 1rem;
+    color: #0a66c2;
   }
 
   .portrait {
-    margin: 0;
-    max-width: 300px;
+    display: block;
+    margin: 0 auto calc(var(--space-3) + 0.5rem);
+    width: min(320px, 100%);
   }
 
   .portrait :global(img.portraitImage) {
@@ -135,53 +189,10 @@ const structuredData = getServicePageStructuredData({
     background: var(--bg-soft);
   }
 
-  .aboutBottom ul {
-    padding-left: 1.2rem;
-    margin-top: 0.2rem;
-    margin-bottom: var(--space-2);
-  }
-
-  .aboutBottom li + li {
-    margin-top: 0.35rem;
-  }
-
-  @media (max-width: 760px) {
-    .aboutPage {
-      grid-template-columns: 1fr;
-      grid-template-areas:
-        "heading"
-        "photo"
-        "intro"
-        "bottom";
-      row-gap: var(--space-2);
-    }
-
-    .aboutIntro {
-      display: contents;
-    }
-
-    .aboutIntro > h1 {
-      grid-area: heading;
-      max-width: 62ch;
-      margin-bottom: 0;
-    }
-
-    .aboutIntroBody {
-      grid-area: intro;
-    }
-
+  @media (min-width: 900px) {
     .portrait {
-      max-width: min(320px, 70vw);
-    }
-
-    .aboutBottom {
-      margin-top: 0;
-      padding-top: var(--space-2);
-    }
-
-    .aboutAside {
-      padding-top: 0;
-      justify-self: center;
+      width: 340px;
+      margin-bottom: var(--space-4);
     }
   }
 </style>

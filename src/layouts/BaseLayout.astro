@@ -9,6 +9,10 @@ const {
   canonicalPath = "/",
   ogType = "website",
   ogImagePath = "/og.png",
+  ogImageAlt = "Web Application Security Inspection — Sayyidi Shaarani",
+  ogImageWidth = 1200,
+  ogImageHeight = 630,
+  noindex = false,
   structuredData = null,
 } = Astro.props;
 
@@ -52,6 +56,8 @@ const isCurrent = (href: string): boolean => {
 
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
+    {noindex && <meta name="robots" content="noindex,follow" />}
+    {noindex && <meta name="googlebot" content="noindex,follow" />}
 
     <link rel="canonical" href={canonicalUrl} />
 
@@ -60,10 +66,18 @@ const isCurrent = (href: string): boolean => {
     <meta property="og:type" content={ogType} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={`${DOMAIN}${ogImagePath}`} />
+    <meta property="og:image:width" content={String(ogImageWidth)} />
+    <meta property="og:image:height" content={String(ogImageHeight)} />
+    <meta property="og:image:alt" content={ogImageAlt} />
 
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    {description && <meta name="twitter:description" content={description} />}
+    <meta name="twitter:image" content={`${DOMAIN}${ogImagePath}`} />
+    <meta name="twitter:image:alt" content={ogImageAlt} />
     {structuredData && (
       <script
+        is:inline
         type="application/ld+json"
         set:html={JSON.stringify(structuredData)}
       />
@@ -74,12 +88,15 @@ const isCurrent = (href: string): boolean => {
         --max-width: 820px;
         --measure: 66ch;
         --content-top: clamp(3.25rem, 5.6vw, 4.2rem);
-        --text: #0f172a;
-        --muted: #475569;
-        --border: #cbd5e1;
-        --bg: #f6f8fb;
-        --bg-soft: #eef2f7;
-        --link: #1e3a8a;
+        --text: #1b3053;
+        --muted: #556986;
+        --border: #c3cfdf;
+        --border-strong: #acbdd3;
+        --bg: #ebf0f7;
+        --bg-soft: #f7f9fc;
+        --link: #2b4f92;
+        --accent: #1d3d74;
+        --accent-hover: #17325f;
         --radius: 12px;
 
         --space-1: 0.5rem;
@@ -265,19 +282,19 @@ const isCurrent = (href: string): boolean => {
 
       .cta:hover {
         text-decoration: none;
-        border-color: #c8c8c8;
+        border-color: var(--border-strong);
         background: var(--bg-soft);
       }
 
       .ctaPrimary {
-        background: var(--text);
+        background: var(--accent);
         color: #fff;
-        border-color: var(--text);
+        border-color: var(--accent);
       }
 
       .ctaPrimary:hover {
-        background: #1e293b;
-        border-color: #1e293b;
+        background: var(--accent-hover);
+        border-color: var(--accent-hover);
       }
 
       .ctaSecondary {

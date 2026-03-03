@@ -1,12 +1,12 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { getServicePageStructuredData } from "../../lib/structuredData";
+import { getWebPageStructuredData } from "../../lib/structuredData";
 
 const title = "Security Disclosure Policy | Sayyidi Shaarani";
 const description =
-  "Security disclosure policy and engagement boundaries.";
+  "Plain-language security disclosure policy and engagement boundaries.";
 
-const structuredData = getServicePageStructuredData({
+const structuredData = getWebPageStructuredData({
   path: "/disclosure/",
   title,
   description,
@@ -21,11 +21,22 @@ const structuredData = getServicePageStructuredData({
 >
   <section class="hero" aria-labelledby="disclosure-title">
     <h1 id="disclosure-title">Security Disclosure Policy</h1>
+    <div class="summaryBox" aria-label="Plain-language summary">
+      <h2>Plain-Language Summary</h2>
+      <ul>
+        <li>I only test systems with written permission from the owner.</li>
+        <li>I do not test or scan random third-party systems.</li>
+        <li>If you find an issue in a system, contact that system owner directly.</li>
+      </ul>
+    </div>
+
     <p>
-      This practice conducts web application security inspections strictly under defined scope and written authorization.
+      This policy explains how inspections are handled safely, legally, and
+      within agreed boundaries.
     </p>
     <p>
-      No active testing, automated scanning, exploitation, or validation of security weaknesses is performed without explicit permission from the system owner.
+      No active testing, automated scanning, exploitation, or validation is
+      performed without explicit permission from the system owner.
     </p>
 
     <h2>Scope &amp; Boundaries</h2>
@@ -63,9 +74,6 @@ const structuredData = getServicePageStructuredData({
       <li>Relevant timestamps or context</li>
     </ul>
     <p>Incomplete or speculative reports may not be actionable.</p>
-    <p class="muted">
-      Last updated: March 2026
-    </p>
   </section>
 </BaseLayout>
 
@@ -80,6 +88,18 @@ const structuredData = getServicePageStructuredData({
 
   .hero ul {
     margin-bottom: var(--space-3);
+  }
+
+  .summaryBox {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--bg-soft);
+    padding: var(--space-2);
+    margin: var(--space-2) 0 var(--space-3);
+  }
+
+  .summaryBox h2 {
+    margin-top: 0;
   }
 
 </style>

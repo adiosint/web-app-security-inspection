@@ -1,0 +1,46 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { inspectionScopeMailtoHref } from "../lib/contact";
+
+const title = "Page Not Found | Sayyidi Shaarani";
+const description =
+  "The page you requested could not be found. Continue to inspection details, notes, or contact.";
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath="/404/"
+  noindex={true}
+>
+  <section class="notFound" aria-labelledby="not-found-title">
+    <h1 id="not-found-title">Page Not Found</h1>
+    <p class="lede">
+      The page you are looking for may have moved, been removed, or the URL may
+      be incorrect.
+    </p>
+    <p>
+      Continue from the links below.
+    </p>
+
+    <nav class="ctaRow" aria-label="404 recovery actions">
+      <a class="cta ctaPrimary" href="/">Go to Homepage</a>
+      <a class="cta ctaSecondary" href="/inspection/">How Inspection Works</a>
+      <a class="cta ctaSecondary" href="/notes/">Read Security Notes</a>
+    </nav>
+
+    <p class="muted contactLine">
+      Need help finding something? <a href={inspectionScopeMailtoHref}>Contact</a>
+    </p>
+  </section>
+</BaseLayout>
+
+<style>
+  .notFound {
+    max-width: 66ch;
+  }
+
+  .contactLine {
+    margin-top: var(--space-2);
+  }
+</style>

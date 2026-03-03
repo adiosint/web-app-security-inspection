@@ -3,9 +3,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { inspectionScopeMailtoHref } from "../lib/contact";
 import { getServicePageStructuredData } from "../lib/structuredData";
 
-const title = "Sayyidi Shaarani";
+const title = "Web Application Security Inspection | Sayyidi Shaarani";
 const description =
-  "Independent web application security inspector. Security inspections and applied research.";
+  "Web application security inspections for SMEs, startups, and NGOs. Clear scope, careful testing, and practical fix priorities.";
 
 const structuredData = getServicePageStructuredData({
   path: "/",
@@ -23,27 +23,61 @@ const structuredData = getServicePageStructuredData({
   <section aria-labelledby="home-title" class="hero">
     <h1 id="home-title">Web Application Security Inspection</h1>
     <p class="lede">
-      For SMEs, startups, and NGOs that need a clear view of security risk in their web applications.
+      Understand the current security condition of your web application and what
+      requires attention first.
     </p>
     <p>
-      I provide structured inspections with clear scope, careful testing, and
-      plain-language reporting focused on practical fixes.
+      For SMEs, startups, and NGOs that need a clear picture of security risk
+      before funding discussions, enterprise sales, audits, or rapid product
+      growth.
     </p>
 
     <ul class="points" aria-label="Inspection approach">
       <li>Written scope and authorization before testing</li>
-      <li>Findings documented with clear supporting evidence</li>
-      <li>Practical guidance that fits your team and timeline</li>
+      <li>Validated findings with reproducible evidence</li>
+      <li>Prioritized remediation guidance your team can execute</li>
     </ul>
 
     <nav class="ctaRow" aria-label="Primary actions">
       <a class="cta ctaPrimary" href={inspectionScopeMailtoHref}
-        >Request Inspection Scope Review</a
+        >Request Scope Review</a
       >
       <a class="cta ctaSecondary" href="/inspection/">How Inspection Works</a>
     </nav>
 
-    <p class="muted meta">Typical duration: 1–2 weeks, depending on scope.</p>
+    <p class="muted meta">
+      Typical duration for small-to-medium scopes: 1–2 weeks.
+    </p>
+    <p class="muted meta">
+      No testing begins until scope and authorization are confirmed.
+    </p>
+  </section>
+
+  <section aria-labelledby="baseline-title">
+    <h2 id="baseline-title">Why Start With an Inspection</h2>
+    <p>
+      Security issues are often not visible during daily product use. Access
+      controls, data handling behavior, and permission boundaries can fail
+      quietly until external scrutiny begins.
+    </p>
+    <p>
+      A structured inspection helps your team identify confirmed risks early and
+      focus fix effort where it matters most.
+    </p>
+  </section>
+
+  <section aria-labelledby="receive-title">
+    <h2 id="receive-title">What You Receive</h2>
+    <ul class="points" aria-label="Inspection deliverables">
+      <li>Confirmed findings with supporting evidence</li>
+      <li>Clear severity classifications</li>
+      <li>Prioritized remediation order</li>
+      <li>Structured documentation for technical and non-technical stakeholders</li>
+    </ul>
+    <nav class="ctaRow" aria-label="Secondary homepage actions">
+      <a class="cta ctaSecondary" href="/inspection/">View Inspection Process</a>
+      <a class="cta ctaSecondary" href="/notes/">Read Security Notes</a>
+    </nav>
   </section>
 </BaseLayout>
 

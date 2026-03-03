@@ -1,7 +1,7 @@
 ---
 title: "Why Security Visibility Should Come Before Scale"
 description: "Why growing teams should establish clear security visibility before complexity expands."
-date: 2026-03-06
+date: 2026-02-24
 draft: false
 series: "Structured Inspection Series"
 primaryLabel: "When to Inspect"

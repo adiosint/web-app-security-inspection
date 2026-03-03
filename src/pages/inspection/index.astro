@@ -6,17 +6,60 @@ import {
 } from "../../lib/contact";
 import { getServicePageStructuredData } from "../../lib/structuredData";
 
-const title = "Security Inspections for Web Applications | Sayyidi Shaarani";
+const title = "Web App Inspection Process | Sayyidi Shaarani";
 const description =
-  "Security inspections for web applications. For SMEs, startups, and NGOs that need a clear view of risk. Clear scope, careful testing, and plain-language reporting.";
+  "A clear, step-by-step web application security inspection for SMEs, startups, and NGOs. Get confirmed issues, plain-language risk levels, and fix priorities.";
 
 const mailtoHref = inspectionScopeMailtoHref;
 
-const structuredData = getServicePageStructuredData({
+const serviceStructuredData = getServicePageStructuredData({
   path: "/inspection/",
   title,
   description,
 });
+
+const faqItems = [
+  {
+    question: "Why run this before a penetration test?",
+    answer:
+      "This inspection gives you a clear baseline and fix order first. It helps you decide whether and when penetration testing is needed, and what it should focus on.",
+  },
+  {
+    question: "Is this safe for production systems?",
+    answer:
+      "Testing is designed to minimize impact, stays within agreed scope, and only goes as far as needed to confirm real risk.",
+  },
+  {
+    question: "What if no major issues are found?",
+    answer:
+      "You still receive documented results that show what was reviewed, what worked well, and what to monitor next.",
+  },
+  {
+    question: "Can this support compliance conversations?",
+    answer:
+      "This is not a certification service, but the report can help with internal reviews and external risk conversations.",
+  },
+];
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    ...serviceStructuredData["@graph"],
+    {
+      "@type": "FAQPage",
+      "@id": "https://sayyidishaarani.com/inspection/#faq",
+      url: "https://sayyidishaarani.com/inspection/#faq",
+      mainEntity: faqItems.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.answer,
+        },
+      })),
+    },
+  ],
+};
 ---
 
 <BaseLayout
@@ -25,129 +68,130 @@ const structuredData = getServicePageStructuredData({
   canonicalPath="/inspection/"
   structuredData={structuredData}
 >
-  <!-- HERO -->
-  <section id="hero" class="hero">
-    <h1>Security Inspections for Web Applications</h1>
-    <p class="lede">For SMEs, startups, and NGOs that need a clear view of web application security risk.</p>
+  <section id="hero" class="hero" aria-labelledby="inspection-title">
+    <h1 id="inspection-title">How the Inspection Works</h1>
+    <p class="lede">
+      A practical web application security review that shows where you are
+      exposed and what to fix first.
+    </p>
+    <p>
+      Built for SMEs, startups, and NGOs that want clear answers without heavy
+      security jargon.
+    </p>
 
     <nav class="ctaRow" aria-label="Primary inspection actions">
-      <a class="cta ctaPrimary" href={mailtoHref}>Request Inspection Scope Review</a>
-      <a class="cta ctaSecondary" href="#model">How Inspection Works</a>
+      <a class="cta ctaPrimary" href={mailtoHref}>Request Scope Review</a>
+      <a class="cta ctaSecondary" href="#faq">View FAQ</a>
     </nav>
 
     <p class="muted meta">
-      Typical duration: 1–2 weeks, depending on scope.
+      Typical duration for small-to-medium scopes: 1–2 weeks.
+    </p>
+    <p class="muted meta">
+      Testing starts only after written scope and authorization are confirmed.
     </p>
   </section>
 
-  <!-- MODEL -->
-  <section id="model">
-    <h2>How the Inspection Works</h2>
-    <p class="muted">A clear step-by-step process so teams know what will happen and why.</p>
-
-    <div class="grid two">
-      <div class="card">
-        <h3>Agree Scope and Permission</h3>
-        <p class="muted">We define what will be reviewed and confirm written authorization before testing starts.</p>
-      </div>
-
-      <div class="card">
-        <h3>Check What Is Publicly Exposed</h3>
-        <p class="muted">We review what is reachable from the public internet and flag obvious risks.</p>
-      </div>
-
-      <div class="card">
-        <h3>Test Core Security Areas</h3>
-        <p class="muted">
-          We test key areas such as login, account access, user input, and important user actions within scope.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>Deliver a Clear Action Report</h3>
-        <p class="muted">You receive prioritized findings with practical steps your team can act on.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- WHO -->
-  <section id="who">
-    <h2>Who This Is For</h2>
-    <p class="muted">
-      Designed for organizations that run web applications and need clear security guidance
-      without heavy technical language.
+  <section id="what" aria-labelledby="what-title">
+    <h2 id="what-title">What This Inspection Is</h2>
+    <p>
+      We review your web application to check whether key protections actually
+      work in real use.
     </p>
     <ul>
-      <li>SMEs running customer websites and web apps</li>
-      <li>Startups iterating rapidly</li>
-      <li>NGOs handling sensitive data</li>
-      <li>Teams growing quickly with limited internal security support</li>
+      <li>Login and session handling</li>
+      <li>Access permissions and role boundaries</li>
+      <li>Input handling and data exposure risks</li>
+      <li>Configuration issues and high-impact logic flaws</li>
+    </ul>
+    <p class="muted">
+      Findings are confirmed manually to reduce false positives. The approach is
+      informed by OWASP guidance (for example, ASVS and WSTG).
+    </p>
+  </section>
+
+  <section id="how" aria-labelledby="how-title">
+    <h2 id="how-title">How It Works</h2>
+    <ol class="phaseList">
+      <li>
+        <strong>Scope and authorization:</strong> targets, boundaries, and
+        approval are confirmed.
+      </li>
+      <li>
+        <strong>Application walkthrough:</strong> key user flows and sensitive
+        actions are mapped.
+      </li>
+      <li>
+        <strong>Security review:</strong> core risk areas are tested within
+        agreed scope.
+      </li>
+      <li>
+        <strong>Controlled validation:</strong> issues are reproduced and
+        confirmed with clear evidence.
+      </li>
+      <li>
+        <strong>Report and prioritization:</strong> you receive risk levels and
+        practical fix order.
+      </li>
+    </ol>
+    <p class="muted">
+      No intentionally destructive actions are performed. Testing only goes as
+      far as needed to confirm risk.
+    </p>
+  </section>
+
+  <section id="deliverables" aria-labelledby="deliverables-title">
+    <h2 id="deliverables-title">What You Receive</h2>
+    <ul>
+      <li>Confirmed findings with reproducible evidence</li>
+      <li>Plain-language risk levels (critical, high, medium, low)</li>
+      <li>Prioritized remediation guidance</li>
+      <li>A concise report suitable for technical and non-technical stakeholders</li>
+      <li>Optional clarification support after delivery</li>
     </ul>
   </section>
 
-  <!-- DEFINITION -->
-  <section id="definition">
-    <h2>What This Is and Is Not</h2>
+  <section id="not" aria-labelledby="not-title">
+    <h2 id="not-title">What This Is Not</h2>
+    <ul>
+      <li>A compliance certification</li>
+      <li>A one-click automated scan dump</li>
+      <li>A guarantee of zero risk</li>
+      <li>A full adversarial red team simulation</li>
+    </ul>
+  </section>
 
-    <div class="grid two">
-      <div class="card">
-        <h3>What This Is</h3>
-        <ul>
-          <li>Clear scope before testing starts</li>
-          <li>Focused testing within agreed boundaries</li>
-          <li>Clear written documentation</li>
-          <li>Practical guidance for your team</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h3>What This Is Not</h3>
-        <ul>
-          <li>No staged attack demo exercises</li>
-          <li>No raw automated scan output without review</li>
-          <li>Not a formal compliance audit</li>
-        </ul>
-      </div>
+  <section id="faq" aria-labelledby="faq-title">
+    <h2 id="faq-title">Frequently Asked Questions</h2>
+    <div class="faqList">
+      {faqItems.map((item) => (
+        <details class="faqItem">
+          <summary class="faqSummary">
+            <span>{item.question}</span>
+          </summary>
+          <div class="faqPanel">
+            <p>{item.answer}</p>
+          </div>
+        </details>
+      ))}
     </div>
   </section>
 
-  <!-- REPORT -->
-  <section id="report">
-    <h2>Report Includes</h2>
-    <div class="callout">
-      <ul>
-        <li>Simple summary in plain language</li>
-        <li>Prioritized risk list</li>
-        <li>Findings with supporting evidence</li>
-        <li>Practical fix recommendations</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- CONTACT FLOW -->
-  <section id="contact-flow">
-    <h2>After You Email</h2>
-    <ol>
-      <li>Initial reply, typically within one business day</li>
-      <li>Short call to confirm what to test and when</li>
-      <li>Written scope and authorization before any testing activity</li>
-    </ol>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact">
-    <h2>Request an Inspection Scope Review</h2>
-    <p>Security inspections begin with written authorization and a defined scope discussion.</p>
-    <p>No testing, scanning, or validation activity is conducted before scope and permission are confirmed.</p>
+  <section id="contact" aria-labelledby="contact-title">
+    <h2 id="contact-title">Start with a Scope Review</h2>
+    <p>
+      Share your target URL, environment, preferred testing window, and
+      authorized contact. You can decide whether to proceed after scope review.
+    </p>
 
     <nav class="ctaRow" aria-label="Contact actions">
-      <a class="cta ctaPrimary" href={mailtoHref}>Request Inspection Scope Review</a>
-      <a class="cta ctaSecondary" href="#model">How Inspection Works</a>
+      <a class="cta ctaPrimary" href={mailtoHref}>Request Scope Review</a>
+      <a class="cta ctaSecondary" href="/boundaries/">Engagement Boundaries</a>
     </nav>
 
     <aside class="contactGovernance muted" aria-label="Engagement governance">
       <p>
-        See the <a href="/disclosure/">Security Disclosure Policy</a> for governance terms.
+        See the <a href="/disclosure/">Security Disclosure Policy</a> for engagement terms.
       </p>
       <p>
         For preliminary inquiries, you may also email
@@ -163,46 +207,70 @@ const structuredData = getServicePageStructuredData({
     font-size: 0.9rem;
   }
 
-  .grid.two {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-2);
-    margin-top: var(--space-2);
-  }
-
-  .card {
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: var(--space-2);
-    background: var(--bg-soft);
-  }
-
-  .card h3 {
-    margin-bottom: 0.45rem;
-    font-size: 1.05rem;
-  }
-
-  @media (min-width: 780px) {
-    .grid.two {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: var(--space-3);
-    }
-  }
-
-  .callout {
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: var(--space-2);
-    background: var(--bg-soft);
-  }
-
-  ul,
-  ol {
+  .phaseList {
     padding-left: 1.2rem;
   }
 
-  li + li {
-    margin-top: 0.35rem;
+  .phaseList li + li {
+    margin-top: 0.45rem;
+  }
+
+  .faqList {
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .faqItem {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--bg-soft);
+    overflow: clip;
+  }
+
+  .faqSummary {
+    list-style: none;
+    cursor: pointer;
+    padding: var(--space-2);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.35;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+  }
+
+  .faqSummary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faqSummary:focus-visible {
+    outline: 2px solid var(--text);
+    outline-offset: 3px;
+    border-radius: 8px;
+  }
+
+  .faqSummary::after {
+    content: "+";
+    font-weight: 700;
+    color: var(--muted);
+  }
+
+  .faqItem[open] .faqSummary::after {
+    content: "\2212";
+  }
+
+  .faqPanel {
+    padding: 0.7rem var(--space-2) 0.85rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .faqPanel p {
+    color: var(--muted);
+    margin: 0;
+    max-width: none;
+    line-height: 1.65;
   }
 
   .contactGovernance {
@@ -220,4 +288,14 @@ const structuredData = getServicePageStructuredData({
     margin-bottom: 0;
   }
 
+  @media (max-width: 640px) {
+    .faqSummary {
+      padding: 0.9rem 0.95rem;
+      font-size: 1rem;
+    }
+
+    .faqPanel {
+      padding: 0.78rem 0.95rem 0.95rem;
+    }
+  }
 </style>

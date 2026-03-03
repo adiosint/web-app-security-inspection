@@ -1,0 +1,5 @@
+Contact: mailto:salam@sayyidishaarani.com
+Policy: https://sayyidishaarani.com/disclosure/
+Canonical: https://sayyidishaarani.com/.well-known/security.txt
+Preferred-Languages: en
+Expires: 2027-03-01T00:00:00.000Z
