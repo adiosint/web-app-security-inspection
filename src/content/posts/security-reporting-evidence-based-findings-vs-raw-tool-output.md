@@ -1,7 +1,7 @@
 ---
-title: "Clear Security Reports vs Raw Tool Output"
-description: "Why clear inspection reporting is more useful than raw scanner output alone."
-date: 2026-02-28
+title: "Security Reporting: Evidence-Based Findings vs Raw Tool Output"
+description: "Learn why evidence-backed reporting gives teams clearer remediation priorities than scanner dumps after web application security inspection."
+date: 2026-03-07
 draft: false
 series: "Structured Inspection Series"
 primaryLabel: "How to Act on Findings"

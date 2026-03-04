@@ -1,7 +1,7 @@
 ---
-title: "How to Decide What to Fix First After an Inspection"
-description: "A simple method for turning inspection findings into a practical fix order."
-date: 2026-02-27
+title: "How to Prioritize Security Findings After an Inspection"
+description: "Use a practical workflow that combines severity with business context to decide what to fix first after web application security inspection."
+date: 2026-03-05
 draft: false
 series: "Structured Inspection Series"
 primaryLabel: "How to Act on Findings"
@@ -10,23 +10,48 @@ secondaryLabel: "How Inspection Works"
 
 After an inspection, teams often ask the same question: what should we fix first?
 
-The answer is usually not "the longest list" or "the highest number only." It is the issue that creates the highest real-world risk in your environment.
+The answer is usually not "the longest list" or "the highest score only." It is the issue that creates the highest real-world risk in your environment.
 
 ---
 
-## Start With Exposure
+## Separate Classification From Priority
 
-Begin with simple questions:
+Start with one rule:
 
-- Is the issue reachable from the internet?
-- Does it affect sensitive data or critical actions?
-- Can it be misused without unusual conditions?
+Use severity to classify findings.  
+Use context to prioritize remediation.
 
-If most answers are yes, that item should be near the top of your plan.
+Severity gives consistency, but it does not include your full business consequence.
 
 ---
 
-## Separate High-Impact Issues From Hygiene
+## Step 1: Classify Findings Consistently
+
+Severity frameworks are still useful. They help teams:
+
+- Use a shared language
+- Compare technical characteristics consistently
+- Reduce reporting ambiguity
+
+This step keeps reporting stable and clear.
+
+---
+
+## Step 2: Add Context That Changes Urgency
+
+Before assigning fix order, assess:
+
+- External reachability
+- Data sensitivity
+- Impact on critical user actions
+- Existing controls and temporary containment
+- Realistic misuse conditions
+
+A high-severity item with strong safeguards may be scheduled after a medium-severity item that is internet-reachable and business-critical.
+
+---
+
+## Step 3: Separate High-Impact Issues From Hygiene
 
 Not all findings have the same consequence.
 
@@ -40,7 +65,7 @@ Routine hygiene items still matter, but can often be scheduled after high-impact
 
 ---
 
-## Use a Simple Priority Model
+## Step 4: Use a Simple Priority Model
 
 A four-step order keeps decisions clear:
 
@@ -58,7 +83,7 @@ Low-impact cleanup that should still be tracked.
 
 ---
 
-## Add Operational Reality
+## Step 5: Add Operational Reality
 
 Before finalizing priorities, confirm:
 
@@ -71,7 +96,7 @@ This prevents plans that are technically correct but hard to execute.
 
 ---
 
-## Define Done
+## Define Done for Top-Priority Items
 
 For each high-priority finding, define:
 

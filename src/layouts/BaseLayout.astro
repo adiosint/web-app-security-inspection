@@ -7,6 +7,7 @@ const {
   title = "Sayyidi Shaarani",
   description = "",
   canonicalPath = "/",
+  includeCanonical = true,
   ogType = "website",
   ogImagePath = "/og.png",
   ogImageAlt = "Web Application Security Inspection — Sayyidi Shaarani",
@@ -59,7 +60,9 @@ const isCurrent = (href: string): boolean => {
     {noindex && <meta name="robots" content="noindex,follow" />}
     {noindex && <meta name="googlebot" content="noindex,follow" />}
 
-    <link rel="canonical" href={canonicalUrl} />
+    {includeCanonical && <link rel="canonical" href={canonicalUrl} />}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
 
     <meta property="og:title" content={title} />
     {description && <meta property="og:description" content={description} />}
@@ -97,14 +100,12 @@ const isCurrent = (href: string): boolean => {
         --link: #2b4f92;
         --accent: #1d3d74;
         --accent-hover: #17325f;
-        --radius: 12px;
 
         --space-1: 0.5rem;
         --space-2: 1rem;
         --space-3: 1.5rem;
         --space-4: 2.5rem;
         --space-5: 4rem;
-        --space-6: 6rem;
       }
 
       * { box-sizing: border-box; }
@@ -169,23 +170,37 @@ const isCurrent = (href: string): boolean => {
       .siteHeader > .inner {
         display: flex;
         justify-content: space-between;
-        align-items: baseline;
+        align-items: center;
         gap: 0.75rem;
       }
 
-      .brand a {
+      .brandLink {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
         text-decoration: none;
         color: var(--text);
         letter-spacing: 0.01em;
       }
 
-      .brand a:hover {
+      .brandMark {
+        width: 1.35rem;
+        height: 1.35rem;
+        display: block;
+        flex-shrink: 0;
+      }
+
+      .brandText {
+        font-weight: 700;
+      }
+
+      .brandLink:hover .brandText {
         text-decoration: underline;
       }
 
       nav.siteNav {
         display: flex;
-        align-items: baseline;
+        align-items: center;
         gap: 0.7rem;
       }
 
@@ -367,9 +382,17 @@ const isCurrent = (href: string): boolean => {
 
     <header class="siteHeader">
       <div class="inner">
-        <div class="brand">
-          <strong><a href="/">Sayyidi Shaarani</a></strong>
-        </div>
+        <a class="brandLink" href="/">
+          <img
+            class="brandMark"
+            src="/favicon.svg"
+            width="22"
+            height="22"
+            alt=""
+            aria-hidden="true"
+          />
+          <span class="brandText">Sayyidi Shaarani</span>
+        </a>
 
         <nav class="siteNav" aria-label="Primary">
           {nav.map((item) => (

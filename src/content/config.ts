@@ -15,7 +15,7 @@ const posts = defineCollection({
     draft: z.boolean(),
     series: z.string().optional(),
     primaryLabel: z.enum(taxonomyLabels),
-    secondaryLabel: z.enum(taxonomyLabels).optional(),
+    secondaryLabel: z.enum(taxonomyLabels),
   }),
 });
 

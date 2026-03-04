@@ -1,6 +1,6 @@
 ---
-title: "Structured Inspection vs Adversarial Simulation"
-description: "A simple explanation of how structured inspection differs from adversarial security simulation."
+title: "Structured Inspection vs Adversarial Simulation: Key Differences"
+description: "Compare goals, methods, and outcomes so teams can choose the right security assessment model for scope, evidence, and prioritization."
 date: 2026-03-02
 draft: false
 series: "Structured Inspection Series"
